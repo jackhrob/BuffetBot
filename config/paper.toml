@@ -1,0 +1,10 @@
+# Configuration inspection only; broker execution is not implemented in BB-001.
+mode = "paper"
+
+[paths]
+state = "../var/state"
+data = "../var/data"
+artifacts = "../var/artifacts"
+
+[broker]
+endpoint = "https://paper-api.alpaca.markets"

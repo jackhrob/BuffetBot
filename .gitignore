@@ -1,0 +1,44 @@
+# Python tooling and build products
+.venv/
+__pycache__/
+*.py[cod]
+.pytest_cache/
+.ruff_cache/
+.coverage
+htmlcov/
+dist/
+build/
+*.egg-info/
+
+# Local credentials and configuration
+.env
+.env.*
+!.env.example
+*.local.toml
+*.pem
+*.key
+
+# Runtime state, data, models, and generated artifacts
+/var/*
+!/var/README.md
+*.sqlite
+*.sqlite-*
+*.sqlite3
+*.sqlite3-*
+*.db
+*.db-*
+*.parquet
+*.joblib
+*.pkl
+*.pickle
+*.onnx
+*.safetensors
+*.gguf
+*.pt
+*.pth
+*.log
+
+# Editor and platform files
+.idea/
+.vscode/
+.DS_Store

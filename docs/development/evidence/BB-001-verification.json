@@ -1,0 +1,208 @@
+{
+  "story": "BB-001",
+  "verified_at_utc": "2026-09-07T22:59:28.289019+00:00",
+  "source_sha256": "bf8885deaa459a3d864fb434dd4ad25caecf64af12338b8a522ba8d61fd6b14c",
+  "source_files": [
+    ".gitignore",
+    ".python-version",
+    "config/offline.toml",
+    "config/paper.toml",
+    "config/secrets.example.toml",
+    "pyproject.toml",
+    "src/buffetbot/__init__.py",
+    "src/buffetbot/__main__.py",
+    "src/buffetbot/cli.py",
+    "src/buffetbot/config.py",
+    "src/buffetbot/logging.py",
+    "tests/conftest.py",
+    "tests/test_cli.py",
+    "tests/test_config.py",
+    "tests/test_logging.py",
+    "uv.lock"
+  ],
+  "environment": {
+    "python": "3.12.3",
+    "packages": {
+      "buffetbot": "0.1.0",
+      "pydantic": "2.13.5",
+      "pytest": "9.1.1",
+      "ruff": "0.16.6"
+    },
+    "isolated_prefix_verified": true,
+    "fresh_source_import_verified": true
+  },
+  "uv_version": "uv 0.12.10 (x86_64-unknown-linux-gnu)",
+  "tests": ".......................................                                  [100%]\n39 passed in 2.52s",
+  "checks": [
+    {
+      "check": "fresh locked environment",
+      "command": [
+        "/home/jack/.local/bin/uv",
+        "sync",
+        "--locked"
+      ],
+      "expected_exit": 0,
+      "actual_exit": 0,
+      "stdout": "",
+      "stderr": "Using CPython 3.12.3 interpreter at: /usr/bin/python3.12\nCreating virtual environment at: .venv\nResolved 13 packages in 1ms\n   Building buffetbot @ file:///tmp/buffetbot-bb001-clean-z4x98o7g\n      Built buffetbot @ file:///tmp/buffetbot-bb001-clean-z4x98o7g\nPrepared 1 package in 411ms\nInstalled 12 packages in 5ms\n + annotated-types==0.8.0\n + buffetbot==0.1.0 (from file:///tmp/buffetbot-bb001-clean-z4x98o7g)\n + iniconfig==2.3.0\n + packaging==26.3\n + pluggy==1.6.0\n + pydantic==2.13.5\n + pydantic-core==2.46.5\n + pygments==2.21.0\n + pytest==9.1.1\n + ruff==0.16.6\n + typing-extensions==4.16.0\n + typing-inspection==0.4.4\n"
+    },
+    {
+      "check": "CLI version",
+      "command": [
+        "/home/jack/.local/bin/uv",
+        "run",
+        "--locked",
+        "--offline",
+        "buffetbot",
+        "--version"
+      ],
+      "expected_exit": 0,
+      "actual_exit": 0,
+      "stdout": "BuffetBot 0.1.0\n",
+      "stderr": ""
+    },
+    {
+      "check": "offline doctor without credentials",
+      "command": [
+        "/home/jack/.local/bin/uv",
+        "run",
+        "--locked",
+        "--offline",
+        "buffetbot",
+        "doctor",
+        "--json"
+      ],
+      "expected_exit": 0,
+      "actual_exit": 0,
+      "stdout": "{\n  \"status\": \"ready\",\n  \"scope\": \"local_configuration_only\",\n  \"run_id\": \"5720a9fc94944f7895499bd28a0303e4\",\n  \"mode\": \"offline\",\n  \"config_file\": \"/tmp/buffetbot-bb001-clean-z4x98o7g/config/offline.toml\",\n  \"python\": \"3.12.3\",\n  \"paths\": {\n    \"state\": {\n      \"path\": \"/tmp/buffetbot-bb001-clean-z4x98o7g/var/state\",\n      \"exists\": false,\n      \"ready\": true,\n      \"detail\": \"Can create under an accessible parent.\"\n    },\n    \"data\": {\n      \"path\": \"/tmp/buffetbot-bb001-clean-z4x98o7g/var/data\",\n      \"exists\": false,\n      \"ready\": true,\n      \"detail\": \"Can create under an accessible parent.\"\n    },\n    \"artifacts\": {\n      \"path\": \"/tmp/buffetbot-bb001-clean-z4x98o7g/var/artifacts\",\n      \"exists\": false,\n      \"ready\": true,\n      \"detail\": \"Can create under an accessible parent.\"\n    }\n  },\n  \"required_integrations\": [],\n  \"broker\": {\n    \"endpoint\": \"https://paper-api.alpaca.markets\",\n    \"credentials\": \"missing\",\n    \"missing_fields\": [\n      \"api_key\",\n      \"api_secret\"\n    ],\n    \"connectivity\": \"not_checked\"\n  }\n}\n",
+      "stderr": "2026-09-07T22:59:24Z INFO buffetbot.doctor run=5720a9fc94944f7895499bd28a0303e4 job=- Local configuration inspection completed: ready\n"
+    },
+    {
+      "check": "paper inspection without credentials",
+      "command": [
+        "/home/jack/.local/bin/uv",
+        "run",
+        "--locked",
+        "--offline",
+        "buffetbot",
+        "doctor",
+        "--config",
+        "config/paper.toml",
+        "--json"
+      ],
+      "expected_exit": 0,
+      "actual_exit": 0,
+      "stdout": "{\n  \"status\": \"ready\",\n  \"scope\": \"local_configuration_only\",\n  \"run_id\": \"9d00fd3a9468435ab132fd6e55b9c2f4\",\n  \"mode\": \"paper\",\n  \"config_file\": \"/tmp/buffetbot-bb001-clean-z4x98o7g/config/paper.toml\",\n  \"python\": \"3.12.3\",\n  \"paths\": {\n    \"state\": {\n      \"path\": \"/tmp/buffetbot-bb001-clean-z4x98o7g/var/state\",\n      \"exists\": false,\n      \"ready\": true,\n      \"detail\": \"Can create under an accessible parent.\"\n    },\n    \"data\": {\n      \"path\": \"/tmp/buffetbot-bb001-clean-z4x98o7g/var/data\",\n      \"exists\": false,\n      \"ready\": true,\n      \"detail\": \"Can create under an accessible parent.\"\n    },\n    \"artifacts\": {\n      \"path\": \"/tmp/buffetbot-bb001-clean-z4x98o7g/var/artifacts\",\n      \"exists\": false,\n      \"ready\": true,\n      \"detail\": \"Can create under an accessible parent.\"\n    }\n  },\n  \"required_integrations\": [],\n  \"broker\": {\n    \"endpoint\": \"https://paper-api.alpaca.markets\",\n    \"credentials\": \"missing\",\n    \"missing_fields\": [\n      \"api_key\",\n      \"api_secret\"\n    ],\n    \"connectivity\": \"not_checked\"\n  }\n}\n",
+      "stderr": "2026-09-07T22:59:24Z INFO buffetbot.doctor run=9d00fd3a9468435ab132fd6e55b9c2f4 job=- Local configuration inspection completed: ready\n"
+    },
+    {
+      "check": "explicit broker prerequisite failure",
+      "command": [
+        "/home/jack/.local/bin/uv",
+        "run",
+        "--locked",
+        "--offline",
+        "buffetbot",
+        "doctor",
+        "--config",
+        "config/paper.toml",
+        "--require-broker",
+        "--json"
+      ],
+      "expected_exit": 1,
+      "actual_exit": 1,
+      "stdout": "{\n  \"status\": \"prerequisites_missing\",\n  \"scope\": \"local_configuration_only\",\n  \"run_id\": \"7d0d9190ff024e2e821bced1006b9f90\",\n  \"mode\": \"paper\",\n  \"config_file\": \"/tmp/buffetbot-bb001-clean-z4x98o7g/config/paper.toml\",\n  \"python\": \"3.12.3\",\n  \"paths\": {\n    \"state\": {\n      \"path\": \"/tmp/buffetbot-bb001-clean-z4x98o7g/var/state\",\n      \"exists\": false,\n      \"ready\": true,\n      \"detail\": \"Can create under an accessible parent.\"\n    },\n    \"data\": {\n      \"path\": \"/tmp/buffetbot-bb001-clean-z4x98o7g/var/data\",\n      \"exists\": false,\n      \"ready\": true,\n      \"detail\": \"Can create under an accessible parent.\"\n    },\n    \"artifacts\": {\n      \"path\": \"/tmp/buffetbot-bb001-clean-z4x98o7g/var/artifacts\",\n      \"exists\": false,\n      \"ready\": true,\n      \"detail\": \"Can create under an accessible parent.\"\n    }\n  },\n  \"required_integrations\": [\n    \"paper_broker\"\n  ],\n  \"broker\": {\n    \"endpoint\": \"https://paper-api.alpaca.markets\",\n    \"credentials\": \"missing\",\n    \"missing_fields\": [\n      \"api_key\",\n      \"api_secret\"\n    ],\n    \"connectivity\": \"not_checked\"\n  }\n}\n",
+      "stderr": "2026-09-07T22:59:24Z INFO buffetbot.doctor run=7d0d9190ff024e2e821bced1006b9f90 job=- Local configuration inspection completed: prerequisites_missing\n"
+    },
+    {
+      "check": "Ruff lint",
+      "command": [
+        "/home/jack/.local/bin/uv",
+        "run",
+        "--locked",
+        "--offline",
+        "ruff",
+        "check",
+        "src",
+        "tests"
+      ],
+      "expected_exit": 0,
+      "actual_exit": 0,
+      "stdout": "All checks passed!\n",
+      "stderr": ""
+    },
+    {
+      "check": "Ruff formatting",
+      "command": [
+        "/home/jack/.local/bin/uv",
+        "run",
+        "--locked",
+        "--offline",
+        "ruff",
+        "format",
+        "--check",
+        "src",
+        "tests"
+      ],
+      "expected_exit": 0,
+      "actual_exit": 0,
+      "stdout": "9 files already formatted\n",
+      "stderr": ""
+    },
+    {
+      "check": "configuration and redaction test suite",
+      "command": [
+        "/home/jack/.local/bin/uv",
+        "run",
+        "--locked",
+        "--offline",
+        "pytest",
+        "-q"
+      ],
+      "expected_exit": 0,
+      "actual_exit": 0,
+      "stdout": ".......................................                                  [100%]\n39 passed in 2.52s\n",
+      "stderr": ""
+    },
+    {
+      "check": "interpreter and fresh source isolation",
+      "command": [
+        "/home/jack/.local/bin/uv",
+        "run",
+        "--locked",
+        "--offline",
+        "python",
+        "-c",
+        "import json, sys; from importlib.metadata import version; from pathlib import Path; import buffetbot; assert Path(buffetbot.__file__).resolve().is_relative_to(Path.cwd()); assert Path(sys.prefix) == Path.cwd() / '.venv'; print(json.dumps({'python': sys.version.split()[0], 'packages': {name: version(name) for name in ['buffetbot', 'pydantic', 'pytest', 'ruff']}, 'isolated_prefix_verified': True, 'fresh_source_import_verified': True}))"
+      ],
+      "expected_exit": 0,
+      "actual_exit": 0,
+      "stdout": "{\"python\": \"3.12.3\", \"packages\": {\"buffetbot\": \"0.1.0\", \"pydantic\": \"2.13.5\", \"pytest\": \"9.1.1\", \"ruff\": \"0.16.6\"}, \"isolated_prefix_verified\": true, \"fresh_source_import_verified\": true}\n",
+      "stderr": ""
+    },
+    {
+      "check": "Git runtime/secret exclusions",
+      "status": "passed",
+      "ignored": [
+        "config/secrets.local.toml",
+        ".env",
+        ".venv/bin/python",
+        "var/state/account.json",
+        "var/state/orders.sqlite3-wal",
+        "var/data/bars.parquet",
+        "var/artifacts/model.joblib",
+        "var/artifacts/weights.pt"
+      ],
+      "visible": [
+        "pyproject.toml",
+        "uv.lock",
+        "config/offline.toml",
+        "config/secrets.example.toml",
+        "src/buffetbot/config.py",
+        "var/README.md"
+      ]
+    }
+  ],
+  "external_services_contacted_by_application": false,
+  "account_credentials": "removed from verification environment; tests use dummy values"
+}

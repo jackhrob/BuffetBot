@@ -1,0 +1,7 @@
+# Paths resolve relative to this file, independently of the working directory.
+mode = "offline"
+
+[paths]
+state = "../var/state"
+data = "../var/data"
+artifacts = "../var/artifacts"
