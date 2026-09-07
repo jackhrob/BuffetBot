@@ -2,11 +2,11 @@
 
 **Status:** Product direction reviewed by the owner.  
 **Created:** September 7, 2026.  
-**Current phase:** Initial implementation. [BB-001](docs/development/01-project-foundation.md) is complete; the [MVP backlog](docs/development/README.md) tracks remaining implementation.
+**Current phase:** Initial implementation. [BB-001](docs/development/01-project-foundation.md) and [BB-002](docs/development/02-engine-qualification.md) are complete; the [MVP backlog](docs/development/README.md) tracks remaining implementation.
 
 This is BuffetBot's guiding product and architecture document. It governs implementation scope and design decisions. The [development backlog](docs/development/README.md) turns the direction into executable stories and release criteria. The [MVP technical design](docs/mvp-technical-design.md) provides supporting detail; the [build proposal and wargame](docs/build-proposal.md) preserves research and earlier alternatives. If those documents conflict with this one, update them to reflect this direction. Subsequent owner decisions take precedence and should be recorded here.
 
-Everything described below is planned unless explicitly marked as verified. The local Python foundation, configuration/doctor command, redacted logging, and initial tests are implemented with [BB-001 evidence](docs/development/evidence/BB-001.md). Trading engines, strategies, trained models, broker connections, and the dashboard are not yet implemented.
+Everything described below is planned unless explicitly marked as verified. The local Python foundation, configuration/doctor command, redacted logging, and initial tests are implemented with [BB-001 evidence](docs/development/evidence/BB-001.md). [BB-002 evidence](docs/development/evidence/BB-002.md) qualifies Lumibot with synthetic backtests, a saved numerical-model probe and local broker transport tests. Production strategies/model workflows, actual broker connections and the dashboard remain unimplemented.
 
 ## 1. What we are building
 
@@ -82,7 +82,7 @@ Product controls use plain language. Pausing new orders, cancelling pending orde
 | Layer | Default choice | Responsibility |
 | --- | --- | --- |
 | Language and environment | Python 3.12, isolated environment, uv lockfile | Reproducible application and research environment |
-| Trading engine | Lumibot, pending the first compatibility test | Historical simulation and broker lifecycle behind an adapter |
+| Trading engine | Lumibot 4.5.91, qualified in BB-002 with narrow corrections | Historical simulation and broker lifecycle behind an adapter |
 | Broker | Alpaca paper account | External order and account integration |
 | Analysis | pandas and NumPy | Data preparation, features, and numerical calculations |
 | Historical storage | Parquet and DuckDB | Versioned analytical datasets and local queries |
@@ -94,7 +94,7 @@ Product controls use plain language. Pausing new orders, cancelling pending orde
 | Quality | pytest and Ruff | Meaningful behavior checks and consistent code |
 | Deployment | Docker Compose with persistent local volumes | Repeatable dashboard and worker deployment |
 
-Lumibot is the initial candidate, not a verified dependency. The first implementation task must establish its compatibility with our data, timing, accounting, and broker requirements. Record the selected release, dependencies, license, and evaluation results. A replacement must preserve our strategy and data contracts; a failed compatibility test should not lead to building a general trading engine from scratch.
+The [BB-002 engine decision](docs/development/evidence/BB-002-engine-decision.md) adopts Lumibot 4.5.91 for the bounded MVP with demonstrated corrections for eligible feature access, dividend entitlement/payment and partial-order startup import. The native engine owns orders, fills, positions, fees and splits. The decision records its dependency/license findings and limits; actual paper behavior remains unverified until BB-017/018. Requalify upgrades. A replacement must preserve our strategy and data contracts; a failed compatibility test should not lead to building a general trading engine from scratch.
 
 Earlier inspection verified that the development machine has approximately 64 GB RAM, two RTX 3090 GPUs with 24 GB each, Docker, and Ollama with existing models. These are available resources, not minimum product requirements or a model-performance benchmark. Start extraction evaluation with an installed general-purpose model and select the default from measured quality and runtime. Model weights and provider choices remain replaceable.
 

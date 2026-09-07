@@ -4,9 +4,11 @@ BuffetBot is a local application being built for trading research, numerical mac
 
 **Start with the [North Star](NORTHSTAR.md).** It defines the reviewed product direction, technical stack, architecture, MVP scope, operating boundaries, and completion criteria.
 
-The [development backlog](docs/development/README.md) contains 24 MVP stories. The initial Python package, typed configuration, local doctor command, redacted logging, and configuration tests are implemented in BB-001. Trading, backtesting, data ingestion, model inference, and the browser dashboard are later stories and are not implemented yet.
+The [development backlog](docs/development/README.md) contains 24 MVP stories. BB-001 implements the initial Python package, typed configuration, local doctor command, redacted logging, and configuration tests. BB-002 qualifies Lumibot using synthetic offline backtests and local broker transport tests. Production strategies, data ingestion, model workflows, the broker connection, and browser dashboard remain later work.
 
 [BB-001 verification evidence](docs/development/evidence/BB-001.md) records the clean-environment installation and passing checks.
+
+[BB-002 engine decision](docs/development/evidence/BB-002-engine-decision.md) adopts Lumibot 4.5.91 with demonstrated corrections for feature timing, dividend payments and partial-order restart import. It records the dependency/license findings and unrun actual paper checks.
 
 ## Setup
 
@@ -68,14 +70,28 @@ Private `*.local.toml` files, `.env` files, virtual environments, runtime direct
 ## Development checks
 
 ```bash
-uv run --locked ruff check src tests
-uv run --locked ruff format --check src tests
+uv run --locked ruff check src tests qualification
+uv run --locked ruff format --check src tests qualification
 uv run --locked pytest -q
 ```
 
-The tests exercise offline/paper credential boundaries, rejected live configuration, invalid and overlapping paths, symlink protection, secret-safe errors/logging, and the doctor's lack of network access. They use temporary files and dummy secrets; no broker account or model is required.
+The foundation tests exercise offline/paper credential boundaries, rejected live configuration, invalid and overlapping paths, symlink protection, secret-safe errors/logging, and the doctor's lack of network access. They use temporary files and dummy secrets; no broker account or model is required. The engine regression is skipped unless its optional dependencies are installed.
 
-The project has one package in `src/buffetbot`, example files in `config`, tests in `tests`, and ignored runtime locations described in [var/README.md](var/README.md). No trading-engine or model libraries have been added for later stories.
+## Engine qualification
+
+Install the optional qualification group and run the supplied-data experiments from the repository root:
+
+```bash
+uv sync --locked --group qualification
+uv run --locked --offline --group qualification python -m qualification
+uv run --locked --offline --group qualification pytest -q
+```
+
+The command writes `var/qualification/report.json`. It compares repeat ledgers, costs, splits, dividend entitlement/payment, completed observations, saved-model predictions, and the Alpaca software path with synthetic responses. It uses a temporary process with no inherited credentials or dotenv loading and denies Python networking. No account is contacted. A failed invariant exits nonzero; run without Python's `-O` option. Detailed results and limitations are in [BB-002 evidence](docs/development/evidence/BB-002.md).
+
+The group includes Lumibot's substantial upstream dependencies and a small scikit-learn artifact probe. Plain `uv sync --locked` returns to the small foundation environment. Always include `--group qualification` when running engine checks so uv retains those dependencies.
+
+The application package remains in `src/buffetbot`; disposable engine experiments and reusable synthetic fixtures live in `qualification`. Configuration examples are in `config`, regressions in `tests`, and ignored runtime locations are described in [var/README.md](var/README.md).
 
 Supporting documents:
 

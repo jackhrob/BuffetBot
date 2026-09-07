@@ -36,3 +36,5 @@ Provide the contract definitions, example specifications, documented time/unit c
 ## Handoff and limits
 
 These records are shared by ingestion, strategies, reports, and adapters. Keep implementation choices such as table layout or a library's internal order object out of the strategy-facing contract.
+
+Use the [BB-002 engine decision](evidence/BB-002-engine-decision.md) as the verified input: separate eligible features from executable raw prices, preserve dividend receivables/payment dates and native event time, and express the qualified market/day convention and explicit cost/rounding assumptions in the specification.

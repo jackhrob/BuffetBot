@@ -1,0 +1,63 @@
+# BB-002 — Engine decision
+
+**Decision:** Adopt **Lumibot 4.5.91** for the bounded daily US equity/ETF MVP, with the small corrections demonstrated in [qualification/adapters.py](../../../qualification/adapters.py). The unmodified defaults are not qualified. No engine fork, matching engine, or separate order state machine is required.
+
+**Scope:** Completed supplied-data simulations and local Alpaca SDK transport tests on Python 3.12.3. These are synthetic qualification experiments, not a production trading adapter or evidence of investment performance. Actual paper account behavior is **Not run** and remains mandatory in BB-017/018. [Completion evidence](BB-002.md) and [machine-readable results](BB-002-verification.json) record the checks.
+
+## Release and environment
+
+The tested [PyPI release](https://pypi.org/project/lumibot/4.5.91/) declares Python >=3.10; BuffetBot remains on Python 3.12. Its wheel contains a GNU GPL version 3 license, although the package metadata says MIT. The report preserves both values and the shipped license hash. Record this dependency as shipping GPL-3.0 text; do not rely on the MIT metadata when making distribution decisions. The [upstream license file](https://github.com/Lumiwealth/lumibot/blob/master/LICENSE) also contains GPL text.
+
+`pyproject.toml` pins `lumibot==4.5.91` and `scikit-learn==1.9.0` in the optional `qualification` dependency group. `uv.lock` pins their transitive dependencies and distribution hashes. The installed group includes Alpaca SDK 0.44.0 and the numerical, calendar, plotting and provider libraries required by Lumibot. The complete package inventory and Lumibot's direct requirements are in the JSON evidence.
+
+The upstream dependency set is substantial: 275 installed distributions including BuffetBot/dev tooling, about 1.5 GB in this Linux environment, and 279 entries in the cross-platform lock. It includes unused cloud/LLM/provider packages; they do not add application services or change our Ollama architecture. In particular, LiteLLM requires Pydantic 2.12.5, so the lock moves from the foundation's 2.13.5 to 2.12.5. All foundation regressions pass with that resolution. Plain `uv sync --locked` installs only the small foundation/dev set; engine checks require `--group qualification`.
+
+Installation needs package downloads or an existing package cache. The demonstrated runtime needs no paid data, credentials, cloud service, database server, Ollama, or GPU. The launcher uses an isolated temporary directory, an environment allowlist, disabled dotenv discovery, explicit supplied data, a zero risk-free rate, and no benchmark downloads. Python socket/DNS calls are denied and counted; even a caught attempt fails qualification. This is a test guard, not an OS network sandbox. No broker connection or external order is made.
+
+## Accounting and timing findings
+
+| Area | Observed default | Qualified resolution |
+| --- | --- | --- |
+| Daily observations | At July 2 09:30, `get_last_price` returns July 2's close of 112. A current daily history request also exposes that row. Orders then fill against July 2's opening data. This permits lookahead. | Build the strategy context from a separate feature frame filtered by availability time. July 1's completed close of 105 is available at 16:15; its fixture instruction submits at July 2's open. Poisoning later features leaves the earlier context unchanged. BB-003 must preserve this restricted context boundary. |
+| Raw and adjusted prices | Generic engine access does not establish historical feature eligibility. | Keep raw OHLC for execution/marking. Normalize older feature prices for splits only when those splits have become effective. July 2's 112 becomes a feature price of 56 on July 3; the original executable price remains 112. Future adjustment factors cannot rewrite an earlier context. |
+| Fill price | Without bid/ask, the tested market order fills at the current row's open: 110 for the buy and 60 for the sale. | Supply explicitly **synthetic** bid/ask at raw open ±10 bps per side, representing combined spread/slippage. Native quote execution gives 110.11 and 59.94. Native quotes round to two decimals: 56.056 becomes 56.06 in the ex-date-entry case. |
+| Commissions | Native `TradingFee(flat_fee=1)` charges $1 on each order. | Retain the native fee mechanism. Costs here are experiment assumptions, not Alpaca pricing claims. |
+| Splits | Native split processing changes 10 shares to 20 before July 3 orders and divides average execution price from 110.11 to 55.055. | Retain native split handling with raw bars and explicit ratios. Fees are expenses in this example; average execution price is not a tax cost-basis report. |
+| Dividends | The default dividend cache is populated from history available at its first use and misses this later dividend entirely. Even a correctly populated native cache posts on ex-date using current holdings, with no separate payment date. | `ScheduledDividends` replaces only that strategy hook. It records opening ex-date entitlement, retains a receivable after sale, and credits engine cash once on the first supplied session on/after the declared pay date. It uses the native cash store and event recorder. The fixture pays $20 on July 9 despite having sold on July 8. Buying on the ex-date earns $0. |
+| Event time | Native fill ledger timestamps are July 2/8 at 09:30. Strategy fill callbacks arrive during July 3/9 iterations. | Use the engine event timestamp for fill audit records, not the strategy clock when a delayed callback runs. The repeat comparison uses the native ledger. |
+| Equity | Built-in performance reporting does not include the extension's unpaid dividend receivable. | Audit cash + raw-marked holdings + receivable explicitly. All six opening snapshots reconcile to hand-worked totals. BB-009/010 must use that valuation, including pending receivables at the end of a run. |
+
+The dividend extension is fewer than 50 lines of cash-action logic. It deliberately replaces native dividend posting rather than supplementing it. The engine still performs fills, order tracking, inventory updates, commissions, splits and cash storage. The fixture and independent expected ledger remain reusable for BB-009; the qualification strategy's fixed buy/sell instructions are disposable.
+
+## Execution convention and limits
+
+The qualified convention is one decision per supplied exchange session, using only completed and available prior-session features, with **whole-share, simple market/day orders during regular hours**. The example releases the order at the next session's opening timestamp. An opening-price simulation is an assumption; a paper market order is not guaranteed to execute at the official opening price. The 10 bps assumption is neither a forecast nor a bound on real slippage.
+
+The Pandas daily loop trusts its supplied index; it is not a sufficient exchange calendar or data-quality validator. Qualification constructs the index from the NYSE calendar and checks exact coverage: July 4 and the weekend are absent, and July 3 closes at 13:00 New York time. Data ingestion must validate missing, duplicate and closed-session rows before engine entry, because Pandas data repair can fill gaps. DST, broader historical calendars and operational missed-session recovery belong to later data/scheduling tests.
+
+Daily OHLC cannot establish intraday price paths, depth, queue priority, volume-dependent partial fills or auction allocation. Native backtesting also contains limit/stop/stop-limit/trailing/bracket handling, but these paths were not qualified. The explicit guard rejects limit orders, GTC and extended hours. Native strategy slippage settings target other execution paths; this fixture uses quote prices, so its cost must not be inferred from a zero `trade_slippage` field. The $2.30 execution cost is the difference from raw opening notional.
+
+BB-009 must still verify insufficient cash, unfilled final-session orders, missing execution data, portfolios left open, multiple assets and broader corporate actions. The narrow dividend example requires complete ex/pay-date records and starts before entitlement. Reverse splits with fractional cash-in-lieu, special distributions and other unsupported actions must be rejected or explicitly implemented before affected datasets can run. These are bounded data/execution restrictions, not a general-purpose simulator qualification.
+
+## Alpaca software path
+
+The [Alpaca order documentation](https://docs.alpaca.markets/us/docs/working-with-orders) describes custom client identities and lookup; the [Lumibot adapter documentation](https://lumibot.lumiwealth.com/brokers.alpaca.html) describes its integration. Qualification executes the installed Lumibot adapter and real Alpaca SDK, replacing only the SDK's HTTP request boundary with synthetic responses. Broker notifications go to a test subscriber. WebSocket connectivity, remote authentication and remote execution are not tested.
+
+| Requirement | Demonstration and ownership |
+| --- | --- |
+| Paper configuration | Explicit `PAPER=True` reaches the SDK's `https://paper-api.alpaca.markets` base URL, asserted on every fake request. Background order/stream threads are disabled for this probe. The production constructor must use BuffetBot's validated paper settings; the experiment subclass is not itself an application authorization boundary. |
+| Account and positions | Native account parsing and `sync_positions` agree with supplied cash/value/share snapshots. A ten-share completion reconciles to cash 8898.90, holdings value 1101.10 and equity 10000, with zero fixture broker fees. |
+| Stable identity | `Order(custom_params={"client_order_id": ...})` survives SDK serialization and response parsing. Lumibot replaces its internal order identifier with the broker UUID; persist both that UUID and the separate client identity. |
+| Lookup | Native `_pull_broker_order` uses SDK lookup by broker UUID. `broker.api.get_order_by_client_id` finds the same object with the stable client identity. Both paths are exercised. |
+| Partial fills | Native event processing handles execution deltas 4, 2, 4 for a ten-share order. Native position synchronization follows the authoritative snapshots. These are event-handler tests, not actual stream tests. |
+| Restart import | Unmodified native startup imports a four-of-ten partial order as ten executed shares in its transaction list. `QualifiedAlpaca` corrects only `_process_broker_synced_order` to pass the raw `filled_qty=4` into the existing partial-order handler. Repeating synchronization preserves four; a final delta of six gives ten. Only one synthetic POST occurred across submission, lookup and recovery. |
+
+Code inspection also found that native order-list retrieval asks for only the latest 100 orders. It cannot establish complete startup readiness on its own. BB-017 must query all relevant open orders and recover persisted pending intents by their known identities, including client IDs for lost acknowledgments. BB-018 must reconcile partial snapshots that progress between reads, prevent duplicate execution events from being counted twice, and keep ambiguous outcomes non-submitting. The existing single-worker, durable-intent and reconciliation stories own those application controls; they must not be replaced by blind calls to native `sync_orders`.
+
+Actual paper reads, permission/account checks, stream connection/reconnection, submission acceptance, fills, cancellation outcomes, timeout recovery, duplicate/reordered events and cancel/fill races remain mandatory in BB-017/018. Alpaca also documents that its [paper simulator omits several live-market effects and dividends](https://docs.alpaca.markets/us/docs/paper-trading); paper results and our historical dividend model must remain distinct.
+
+## Handoff
+
+BB-003 keeps `generate_targets(context) -> PortfolioTargets` independent of Lumibot objects. Record feature availability, execution session, raw/adjusted price policy, cent rounding, commissions, synthetic execution-cost parameters, dividend entitlement/payment/receivable treatment, model identity and native event timestamps in the contracts and experiment specification. Include current cash, holdings and pending exposure without giving strategies broker access.
+
+Use these proof adapters as a small reference when implementing BB-009/017, then retain the same regression fixtures around the production integration. A dependency upgrade must rerun qualification; the probes assert the selected version and preserve the known failure cases. If fixes grow into a replacement order manager, revisit the engine decision rather than expanding them indefinitely.

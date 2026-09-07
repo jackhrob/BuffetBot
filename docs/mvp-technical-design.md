@@ -2,7 +2,7 @@
 
 The [North Star](../NORTHSTAR.md) is the reviewed primary product and architecture reference. The [development backlog](development/README.md) defines the implementation stories and release evidence. This document supplies supporting implementation detail; align it with the North Star if a conflict arises.
 
-Proposed September 7, 2026. This document describes the target architecture. [BB-001](development/01-project-foundation.md) now provides the verified local Python/configuration foundation; trading, model, and broker integration work remains planned. It refines the earlier [build proposal](build-proposal.md), particularly the engine choice and local model deployment.
+Proposed September 7, 2026. This document describes the target architecture. [BB-001](development/01-project-foundation.md) provides the verified local Python/configuration foundation, and [BB-002](development/02-engine-qualification.md) qualifies the engine with synthetic experiments. Production trading, model, and broker integration work remains planned. It refines the earlier [build proposal](build-proposal.md), particularly the engine choice and local model deployment.
 
 ## Product boundary
 
@@ -23,7 +23,7 @@ Start the extraction evaluation with an installed general-purpose model. Benchma
 | Part | Choice | Purpose |
 | --- | --- | --- |
 | Application | Python 3.12, isolated environment, uv lockfile | One language for research, models, adapters, and UI |
-| Trading engine | Lumibot, subject to an initial compatibility evaluation | Existing simulation and Alpaca integration behind our adapter |
+| Trading engine | Lumibot 4.5.91, qualified with narrow corrections in BB-002 | Existing simulation and Alpaca integration behind our adapter |
 | Data analysis | pandas/NumPy, Parquet, DuckDB | Clean and inspect versioned datasets locally |
 | Operational storage | SQLite with transactions and migrations | Jobs, decisions, model registry metadata, order-event audit records |
 | Data contracts | Pydantic and explicit domain validation | Validate timestamps, units, bounds, and external/model outputs |
@@ -32,9 +32,9 @@ Start the extraction evaluation with an installed general-purpose model. Benchma
 | Numerical ML | scikit-learn | Simple prediction models and preprocessing pipelines |
 | Quality and deployment | pytest, Ruff, Docker Compose | Critical behavior checks, consistent environment, persistent volumes |
 
-Lumibot documents [Alpaca integration](https://lumibot.lumiwealth.com/brokers.alpaca.html) and [backtesting with supplied pandas data](https://lumibot.lumiwealth.com/backtesting.pandas.html). Its currently inspected [license](https://raw.githubusercontent.com/Lumiwealth/lumibot/master/LICENSE) is GPL-3.0. Pin a tested release and record its license/dependencies when implementing.
+Lumibot documents [Alpaca integration](https://lumibot.lumiwealth.com/brokers.alpaca.html) and [backtesting with supplied pandas data](https://lumibot.lumiwealth.com/backtesting.pandas.html). [BB-002's decision](development/evidence/BB-002-engine-decision.md) records the tested release, the shipped GPL-3.0 text despite MIT metadata, locked dependencies and demonstrated corrections. Eligible feature selection, dividend entitlement/payment and partial-order startup import need those narrow adapters; unmodified defaults are not qualified.
 
-The earlier LEAN recommendation was provisional. Its current [Alpaca integration source](https://raw.githubusercontent.com/QuantConnect/Lean.Brokerages.Alpaca/master/QuantConnect.AlpacaBrokerage/AlpacaBrokerage.cs) performs external subscription validation. Lumibot is the first candidate for a local workflow that avoids that dependency. This is a selection proposal, not a claim that its adapter is already validated.
+The earlier LEAN recommendation was provisional. Its current [Alpaca integration source](https://raw.githubusercontent.com/QuantConnect/Lean.Brokerages.Alpaca/master/QuantConnect.AlpacaBrokerage/AlpacaBrokerage.cs) performs external subscription validation. BB-002 demonstrated a local Lumibot workflow that avoids that dependency; actual broker integration is still required later.
 
 Other relevant documentation: [uv environment locking](https://docs.astral.sh/uv/concepts/projects/sync/), [Streamlit execution model](https://docs.streamlit.io/get-started/fundamentals/main-concepts), and [Ollama structured output](https://docs.ollama.com/capabilities/structured-outputs). Schema-conforming output still needs factual evaluation.
 

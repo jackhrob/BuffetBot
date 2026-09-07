@@ -1,6 +1,7 @@
 # BB-002 — Trading engine qualification
 
-**Status:** Not started  
+**Status:** Done
+
 **Depends on:** [BB-001](01-project-foundation.md)  
 **North Star:** Technical stack; shared decision logic; engine evaluation
 
@@ -32,6 +33,8 @@ Evaluate Lumibot first in the isolated project environment. Use a tiny supplied 
 ## Completion evidence
 
 Save the engine decision, dependency details, exact example commands, expected/observed ledger totals, and a list of remaining integration checks. A successful library import alone is insufficient.
+
+**Delivered:** [Engine decision](evidence/BB-002-engine-decision.md), [verification results](evidence/BB-002.md), [machine-readable evidence](evidence/BB-002-verification.json), and the runnable [qualification experiments](../../qualification). Lumibot 4.5.91 is pinned in the optional qualification group. Native defaults exposed timing, dividend and partial-order import problems; small demonstrated adapters resolve the qualified path. Actual broker behavior remains unrun as specified below.
 
 ## Handoff and limits
 

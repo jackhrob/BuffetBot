@@ -1,0 +1,11 @@
+{
+  "cash": 10115.70,
+  "quantity": 0.0,
+  "receivable": 0.0,
+  "events": [
+    {"time": "2024-07-02T09:30:00-04:00", "status": "fill", "side": "buy", "price": 110.11, "quantity": 10.0, "commission": 1.0},
+    {"time": "2024-07-03T09:30:00-04:00", "status": "stock_split", "ratio": 2.0, "quantity": 20.0},
+    {"time": "2024-07-08T09:30:00-04:00", "status": "fill", "side": "sell", "price": 59.94, "quantity": 20.0, "commission": 1.0},
+    {"time": "2024-07-09T09:30:00-04:00", "status": "dividend", "amount": 20.0}
+  ]
+}
