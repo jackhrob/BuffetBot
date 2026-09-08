@@ -1,6 +1,6 @@
 # BuffetBot MVP development backlog
 
-This backlog turns the reviewed [North Star](../../NORTHSTAR.md) into 24 implementation stories. **BB-001 through BB-004 are complete** with [foundation evidence](evidence/BB-001.md), [engine qualification evidence](evidence/BB-002.md), [contract evidence](evidence/BB-003.md), and [snapshot evidence](evidence/BB-004.md). **BB-005 is in progress:** its offline adapter/cache checks pass, while actual provider verification is blocked by missing credentials ([evidence](evidence/BB-005.md)). BB-006 through BB-024 are **not started**. Production trading/model integration and actual paper operation remain future work.
+This backlog turns the reviewed [North Star](../../NORTHSTAR.md) into 24 implementation stories. **BB-001 through BB-004 are complete** with [foundation evidence](evidence/BB-001.md), [engine qualification evidence](evidence/BB-002.md), [contract evidence](evidence/BB-003.md), and [snapshot evidence](evidence/BB-004.md). **BB-005 is in progress:** its offline adapter/cache checks pass, while actual provider verification is blocked by missing credentials ([evidence](evidence/BB-005.md)). **BB-006 is complete** with [durable-job and worker evidence](evidence/BB-006.md). BB-007 through BB-024 are **not started**. Production trading/model integration and actual paper operation remain future work.
 
 The objective is a solid, stable MVP with the least technical complexity needed to meet its requirements. Development speed, story points, and estimates do not determine scope. Correctness, understandability, and a demonstrably working product do.
 
@@ -35,7 +35,7 @@ All 24 stories are required for the MVP. The first usable research workflow is B
 | BB-003 | [Shared contracts and experiment specification](03-contracts-and-experiments.md) — Done | BB-001, BB-002 | Foundation |
 | BB-004 | [Dataset snapshots, quality checks, and fixtures](04-dataset-snapshots.md) — Done | BB-003 | Research |
 | BB-005 | [Historical market data ingestion](05-market-data-ingestion.md) — In progress; real-provider check blocked | BB-004 | Research |
-| BB-006 | [Durable jobs and worker lifecycle](06-jobs-and-worker.md) | BB-001, BB-003, BB-004 | Foundation |
+| BB-006 | [Durable jobs and worker lifecycle](06-jobs-and-worker.md) — Done | BB-001, BB-003, BB-004 | Foundation |
 | BB-007 | [Benchmark and numerical strategy policies](07-strategy-policies.md) | BB-003, BB-004 | Research |
 | BB-008 | [Portfolio limits and order planning](08-portfolio-risk.md) | BB-003, BB-007 | Research and operations |
 | BB-009 | [Backtest execution and accounting](09-backtest-accounting.md) | BB-002, BB-004, BB-006, BB-007, BB-008 | Research |

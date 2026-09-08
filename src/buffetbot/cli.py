@@ -86,6 +86,36 @@ def parser() -> argparse.ArgumentParser:
     replay.add_argument("capture_id")
     for operation in (fixture, inspect, ingest, replay):
         operation.add_argument("--config", type=Path, default=Path("config/offline.toml"))
+    jobs = subcommands.add_parser(
+        "jobs", help="Submit and inspect durable local research jobs (JSON)."
+    )
+    job_operations = jobs.add_subparsers(dest="jobs_command", required=True, parser_class=Parser)
+    submit = job_operations.add_parser("submit", help="Persist one validated research job request.")
+    submit.add_argument("--request", type=Path, required=True)
+    show = job_operations.add_parser("show", help="Show one durable job and its event history.")
+    show.add_argument("request_id")
+    listing = job_operations.add_parser("list", help="List recent jobs.")
+    listing.add_argument("--limit", type=int, default=20)
+    cancel = job_operations.add_parser(
+        "cancel", help="Cancel queued work or request active cancellation."
+    )
+    cancel.add_argument("request_id")
+    worker = subcommands.add_parser(
+        "worker", help="Run or inspect the single local research worker (JSON)."
+    )
+    worker_operations = worker.add_subparsers(
+        dest="worker_command", required=True, parser_class=Parser
+    )
+    worker_operations.add_parser("status", help="Show durable work and shutdown state.")
+    worker_operations.add_parser("once", help="Claim and run at most one research job.")
+    serve = worker_operations.add_parser(
+        "serve", help="Run until stopped or shutdown is requested."
+    )
+    serve.add_argument("--poll-seconds", type=float, default=0.25)
+    worker_operations.add_parser("shutdown", help="Persist a request to stop starting new jobs.")
+    worker_operations.add_parser("resume", help="Clear a persisted shutdown request explicitly.")
+    for operation in (submit, show, listing, cancel, *worker_operations.choices.values()):
+        operation.add_argument("--config", type=Path, default=Path("config/offline.toml"))
     return command
 
 
@@ -153,6 +183,14 @@ def main(argv: list[str] | None = None) -> int:
         logging.getLogger("buffetbot.datasets").info(
             "Dataset operation completed: %s", report["status"]
         )
+        return status
+    if arguments.command in ("jobs", "worker"):
+        # Job children receive an allowlisted environment; this boundary never loads secrets.
+        from buffetbot.jobs_cli import run
+
+        report, status = run(arguments)
+        emit(report, as_json=True, redactor=redactor)
+        logging.getLogger("buffetbot.jobs").info("Job command completed: %s", report["status"])
         return status
     try:
         credentials = load_credentials(arguments.secrets)

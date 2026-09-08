@@ -4,7 +4,7 @@ BuffetBot is a local application being built for trading research, numerical mac
 
 **Start with the [North Star](NORTHSTAR.md).** It defines the reviewed product direction, technical stack, architecture, MVP scope, operating boundaries, and completion criteria.
 
-The [development backlog](docs/development/README.md) contains 24 MVP stories. BB-001 implements the initial Python package, typed configuration, local doctor command, redacted logging, and configuration tests. BB-002 qualifies Lumibot using synthetic offline backtests and local broker transport tests. BB-003 implements shared data/strategy contracts and reproducible experiment specifications. BB-004 adds immutable Parquet snapshots, calendar/quality validation, DuckDB inspection and packaged offline fixtures. BB-005 implements historical import/cache/replay with passing synthetic tests; actual provider verification awaits credentials. Production strategies, model workflows, the broker connection, and browser dashboard remain later work.
+The [development backlog](docs/development/README.md) contains 24 MVP stories. BB-001 implements the initial Python package, typed configuration, local doctor command, redacted logging, and configuration tests. BB-002 qualifies Lumibot using synthetic offline backtests and local broker transport tests. BB-003 implements shared data/strategy contracts and reproducible experiment specifications. BB-004 adds immutable Parquet snapshots, calendar/quality validation, DuckDB inspection and packaged offline fixtures. BB-005 implements historical import/cache/replay with passing synthetic tests; actual provider verification awaits credentials. BB-006 adds durable local research jobs, atomic artifact publication, safe restart handling, and a single-worker lock. Production strategies, model workflows, the broker connection, and browser dashboard remain later work.
 
 [BB-001 verification evidence](docs/development/evidence/BB-001.md) records the clean-environment installation and passing checks.
 
@@ -13,6 +13,8 @@ The [development backlog](docs/development/README.md) contains 24 MVP stories. B
 [BB-003 evidence](docs/development/evidence/BB-003.md) records validated units, data availability, source evidence, pending exposure, immutable specifications and separate run identities. The [contract guide](docs/contracts.md) documents the v1 interfaces and limits.
 
 [BB-004 evidence](docs/development/evidence/BB-004.md) records snapshot publication/reload, crash and corruption checks, explicit synthetic provenance and a fresh installed-package demonstration. The [dataset guide](docs/datasets.md) explains storage, quality policies and the independent accounting fixtures.
+
+[BB-006 evidence](docs/development/evidence/BB-006.md) records the offline durable-job and worker verification. The [job guide](docs/jobs.md) describes its commands, recovery behavior, storage layout, and process boundary.
 
 ## Setup
 
@@ -38,11 +40,16 @@ uv run --locked --offline buffetbot datasets inspect <dataset_id>
 uv run --locked buffetbot datasets ingest --request config/history-spy.json --secrets config/secrets.local.toml
 uv run --locked --offline buffetbot datasets ingest --request config/history-spy.json --cache-only
 uv run --locked --offline buffetbot datasets replay <capture_id>
+uv run --locked --offline buffetbot jobs submit --request examples/jobs/research-probe.json
+uv run --locked --offline buffetbot worker once
+uv run --locked --offline buffetbot worker status
 ```
 
 `datasets fixture` publishes a synthetic dataset under the configured data directory and prints its ID, coverage and quality report. Replace `<dataset_id>` with that ID to verify and inspect it. Dataset commands always emit JSON; exit 1 means quality rejection, and exit 2 means invalid input/configuration or storage. See the [dataset guide](docs/datasets.md) for missing-bar, gap, zero-volume and incomplete-action cases.
 
 `datasets ingest` reuses verified cached history or makes an explicit read-only Alpaca download; `--refresh` requests a new complete version. It returns exit 1 for blocked access or rejected data. `--cache-only` prohibits the connection. uv's `--offline` only controls dependency resolution. `datasets replay` rebuilds a snapshot from its retained original responses without network access. The [market-data guide](docs/market-data.md) explains source/feed/availability limitations and the pending real-provider check ([BB-005 evidence](docs/development/evidence/BB-005.md)).
+
+`jobs submit` accepts a versioned, stable-UUID research request. The same request ID is idempotent only when its meaning is unchanged. `worker once` holds the single-worker lock while it claims and runs one bounded, secret-free research child; `worker status` inspects durable state without a browser, model, or broker. See the [job guide](docs/jobs.md) for cancellation, shutdown, restart recovery, and the offline demonstration.
 
 `doctor` resolves and inspects configuration and storage paths, reports missing credential fields, and emits logs with UTC timestamps, component, and run identity. It does not create runtime directories, authenticate with a broker, place orders, download data, or start models. A `ready` result means local configuration checks passed; it does not certify credentials or trading readiness.
 
@@ -86,6 +93,7 @@ Private `*.local.toml` files, `.env` files, virtual environments, runtime direct
 uv run --locked ruff check src tests qualification examples/contracts/validate.py
 uv run --locked ruff format --check src tests qualification examples/contracts/validate.py
 uv run --locked pytest -q
+uv run --locked --offline python examples/jobs/validate.py
 ```
 
 The foundation tests exercise offline/paper credential boundaries, rejected live configuration, invalid and overlapping paths, symlink protection, secret-safe errors/logging, and the doctor's lack of network access. They use temporary files and dummy secrets; no broker account or model is required. The engine regression is skipped unless its optional dependencies are installed.
@@ -116,9 +124,12 @@ The snapshot tests cover publication/reimport, concurrent publishers, abrupt pro
 
 The ingestion tests add pagination, precise minute aggregation, source/capture binding, refresh/replay, interrupted imports, corrupt caches, unsupported actions, bounded HTTP retries, fixed GET endpoints and credential redaction. Run `uv run --locked --offline python examples/ingestion/validate.py` for the synthetic import demonstration. It does not verify provider entitlement or real prices.
 
+The job tests cover idempotent request submission, bounded lock contention, atomic migrations, cancellation, child timeout, artifact publication failure, restart recovery, persisted shutdown, and exclusive worker ownership. The jobs example runs with socket/DNS access denied and imports no broker, model, or trading-engine packages.
+
 The application package remains in `src/buffetbot`, with packaged offline datasets and independent ledger expectations in `src/buffetbot/fixtures`. Disposable engine experiments and their original fixtures live in `qualification`. Configuration examples are in `config`, regressions in `tests`, and ignored runtime locations are described in [var/README.md](var/README.md).
 
 Supporting documents:
 
 - [MVP technical design](docs/mvp-technical-design.md): module contracts, local model setup, and engineering detail.
+- [Durable local jobs](docs/jobs.md): queue commands, storage, worker lifecycle, and process isolation.
 - [Build proposal and wargame](docs/build-proposal.md): research, failure scenarios, and earlier alternatives.

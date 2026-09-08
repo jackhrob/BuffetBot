@@ -1,0 +1,8 @@
+{
+  "schema_version": 1,
+  "request_id": "00000000-0000-4000-8000-000000000006",
+  "run_id": "00000000-0000-4000-8000-000000000001",
+  "kind": "research_probe",
+  "payload": {"message": "offline durable job demonstration", "delay_ms": 10},
+  "submitted_at": "2026-09-08T00:00:00Z"
+}
