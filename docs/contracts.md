@@ -1,5 +1,7 @@
 # BuffetBot contracts, version 1
 
+BB-004 adds `MarketBar`, the same normalized raw fields before assignment of a dataset ID. `MarketObservation` retains its original v1 serialized contract and now extends that source record with the verified snapshot ID. See the [dataset guide](datasets.md) for immutable storage and experiment binding; the illustrative BB-003 examples below remain independent contract demonstrations.
+
 BB-003 implements the data boundaries needed by the reviewed MVP using the existing Pydantic dependency and the Python standard library. Domain records and the strategy protocol live in [contracts.py](../src/buffetbot/contracts.py); experiment inputs, canonical serialization, run manifests and binding checks live in [experiments.py](../src/buffetbot/experiments.py). Neither module imports a trading engine, broker SDK, dataframe library or model runtime.
 
 ## Records and responsibilities
@@ -97,4 +99,4 @@ uv run --locked --offline pytest -q tests/test_contracts.py
 
 Use `/home/jack/.local/bin/uv` if necessary on this development machine. No qualification group, account, network, model download or GPU is required. The [example directory](../examples/contracts) contains a synthetic specification, context, target and audit event. Its model/dataset digests are explicitly illustrative identifiers, not published artifacts; its example URL is non-resolving and no source is fetched. The all-cash demonstration exercises the strategy signature without implementing BB-007's trading policies. Each invocation prints two distinct run IDs for the same specification.
 
-BB-004 should reuse these records for immutable data snapshots and add only the missing snapshot/corporate-action contracts. BB-007 implements and validates concrete policies/parameters. BB-008 checks execution-time risk. BB-009 binds engine observations/events to these records and implements the qualified corporate-action rules. BB-013/015 validate actual model outputs/artifacts. BB-017/018 apply the broker/account boundary and native lifecycle; none of those integration stories is completed by schema validation.
+BB-004 reuses these records for immutable data snapshots and adds snapshot/corporate-action contracts. BB-007 implements and validates concrete policies/parameters. BB-008 checks execution-time risk. BB-009 binds engine observations/events to these records and implements the qualified corporate-action rules. BB-013/015 validate actual model outputs/artifacts. BB-017/018 apply the broker/account boundary and native lifecycle; those later integrations are not completed by schema validation or snapshot storage.

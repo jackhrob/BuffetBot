@@ -1,0 +1,30 @@
+{
+  "accounting": {},
+  "missing_bar": {
+    "omit_sessions": [
+      "2024-07-05"
+    ]
+  },
+  "gap": {
+    "bar_overrides": {
+      "2024-07-08": {
+        "open": "80",
+        "high": "84",
+        "low": "79",
+        "close": "81"
+      }
+    }
+  },
+  "zero_volume": {
+    "bar_overrides": {
+      "2024-07-08": {
+        "volume": 0
+      }
+    }
+  },
+  "incomplete_actions": {
+    "plan_overrides": {
+      "corporate_actions_coverage": "unknown"
+    }
+  }
+}

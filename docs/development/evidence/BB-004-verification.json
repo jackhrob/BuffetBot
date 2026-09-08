@@ -1,0 +1,163 @@
+{
+  "schema_version": 1,
+  "story": "BB-004",
+  "result": "passed",
+  "origin": "synthetic",
+  "verified_at": "2026-09-08T00:39:33.389932+00:00",
+  "base_git_revision": "12e727622b64b6900e2fa0bec1d925fdd709023d",
+  "working_tree_changes_included": true,
+  "source_sha256": {
+    "NORTHSTAR.md": "741cf5c5a13c387a62ff715293c03401a711a6d3e105c57893a6edab531dc1d2",
+    "README.md": "7a990a7ec9af3392995e4881fdaf6ac427cd2c472b6e3eff80d74a780fbd033d",
+    "config/offline.toml": "cfdfbb9a9415cf80a736d3be2db914f8d0afc8524221385b51f08c1dd830d642",
+    "config/paper.toml": "acd85edf7684974da581fcac8bf263f1c4d2a576707b453b0e55ef86f09dbfb4",
+    "config/secrets.example.toml": "cf3e0b164d8588e2e212e33afd1f7a9f5fd7927371c37e4db30d04dca0e2f706",
+    "docs/contracts.md": "debdd27712d12547f0d12f08e89a5922f2690eeaaf551f0ff2d968363ef7fe3f",
+    "docs/datasets.md": "144e55f9e05878862bcb16abf6bd9edfd4a6aa4582c8b3dece6f7869b8ab6243",
+    "docs/development/04-dataset-snapshots.md": "c9e0429007c7184b050c5d5d22bc7360db7f8cfe3cab105fc474d3849b4557fa",
+    "docs/development/README.md": "2732a74aabdbe341e3852f8bc918addf8e6aa72de99008e0fa9ee1729fe12649",
+    "docs/development/evidence/BB-004-quality-reports.json": "e52745551a05cf3f6ca4109ab49cb023718f5ffc6e718500a6d49f2fbb6100c6",
+    "docs/development/evidence/BB-004.md": "938e2bc128f3aa25e2db21272316e9453112377d5627b72272084e44fbc91bcb",
+    "docs/development/release-acceptance.md": "079d3f62da7d834f750404883b2d137231325d00cb134e0255b9f322316220c6",
+    "docs/mvp-technical-design.md": "34c5d9969ad3a5fc924bb62bd583c7c154bebd94e25bf7b2d49e0a7b6a8c0b53",
+    "examples/contracts/README.md": "72af7dc5bd6650f039c20f1d32962166e196955aa82a1c26a9a221efbbc40fab",
+    "examples/contracts/context.json": "428c0d3bcfa689b50f77d8c8940e98642bb98372cbf4bb41d2b3bfc23c16425c",
+    "examples/contracts/execution-event.json": "749b582913ae06a445cbbad44b11ada23459b157a18cdca11f271906ca0c64a0",
+    "examples/contracts/experiment.json": "9ef50bd53e39c06ba6b7fbc9ef639dc46892e0a253998c4cb1d4afd0db9f2e17",
+    "examples/contracts/targets.json": "2167df40d9f57eb4161c7deee1b4462e6b992578e06a2cc59a6072163198a917",
+    "examples/contracts/validate.py": "cdaa42acf6d4dcd166c1966ac8cee82f85696a6c6d7cec3af462088a8be25199",
+    "pyproject.toml": "252894a3968ec93b78fa8aaef2e9cfc33889a0ba7a59e764b9aa889da5b379a2",
+    "qualification/__init__.py": "1ee27a890a15b270df95455a5afd5d81d9714fa1a82e3ae71c8c333776f43fd7",
+    "qualification/__main__.py": "21abee43d948cbeacc66ef75ba43ed4f44b502e62ffa966b6784ccda1c7732e0",
+    "qualification/adapters.py": "1a4290ccbbfdb5694164b9bdabc6be0bce75ab69889962c2d33175d3ff5360d0",
+    "qualification/backtest.py": "b9a2bf7751f226346bf67e27e4b402300b8d98e3a292d5d78c89b981c4ad4e14",
+    "qualification/fixtures/daily.csv": "25cbeae7cc1773abd0892b15f8aa979a32ffcb120cc15fe4030a368f3cec0883",
+    "qualification/fixtures/dividends.json": "36c5dbd422c1fe998627ab3ccbb9750df6d8ccff04eae678c9eeb50af1cb56a0",
+    "qualification/fixtures/expected.json": "f7f04fc9f22c5dc9bd0a7d1edb68c13b0c4c677728451aafc6f9d615f003e67d",
+    "qualification/fixtures/features.csv": "f6f78403c43b89be6524bb1e281e3551c8f79f135d901077633004233e25d517",
+    "qualification/paper.py": "5a70ca70f1cd28154b22daeafe0d1f66e325aa6f60cee566e3ffd72bf6f976df",
+    "qualification/run.py": "f9e7ffd737cc90603f88b2fe26aed5889c6a97f3a906fbddce648817640b016d",
+    "src/buffetbot/__init__.py": "bb84c71a3550b99a819610278908c65fba0c524503b6b0d0055c0f53d061c34f",
+    "src/buffetbot/__main__.py": "b24f11b2aff855097208b95dc4a183ef0d48a0bf3b5b91c32295cf3c174b353b",
+    "src/buffetbot/cli.py": "f4569bf21294811c0a078f1250f3db98fc8ce932328b95d82048c2974cd478f5",
+    "src/buffetbot/config.py": "406561b34116288822632a32e269f688480864b83da2d943b79a3b78e65abdfc",
+    "src/buffetbot/contracts.py": "837407639238690be4f7047daeb12e6e9680876abd2c63b1094b44a99a0e5472",
+    "src/buffetbot/dataset_models.py": "a369b59242f88cd29a77c8ff9df96dbad7e434ae8bb02388352f851713a581bb",
+    "src/buffetbot/dataset_quality.py": "af2dea1007e2b9735037048e3c1b904d3adcbe4c24e93d942a973aac8cdd43b7",
+    "src/buffetbot/datasets_cli.py": "217ff15254784dbc9bd7f2df6bd595a70c7d9aa615ac9c5e4ce4877388f3b322",
+    "src/buffetbot/experiments.py": "2bf5a79c406dbf8683ed8bc93ad7e1968433fcefdeff4e8a664bdbe4084dba8b",
+    "src/buffetbot/fixtures/README.md": "2aa79213e9fd479658e656669a4e34bdb45140bab19f0baa862ca3e9a9826357",
+    "src/buffetbot/fixtures/__init__.py": "a41ce54414e3bb4e533a354819ef215fa8e5052755fb6b3c20de9ce2a380ef09",
+    "src/buffetbot/fixtures/accounting.json": "30a498e98b1ab9de3ad8d96ee1b2fd9f74f2d0478b738a918b675a484e676603",
+    "src/buffetbot/fixtures/cases.json": "c020d48980ac7e746301ea481a7aa0ccb47e2a7ec3448cb0786fb82878b3c275",
+    "src/buffetbot/fixtures/expected-ledger.json": "ce98cb377ff3699036409b5558791ef801d15baa6bd9157cb289b89879237eef",
+    "src/buffetbot/logging.py": "cf706b1593b855707867fe8265d4018fd9ee8e5aed62bafc34bcb27a83ff5f07",
+    "src/buffetbot/snapshots.py": "f151fda057c6962543921025da45cc6d2b64286aa2adc09fb37cd7eff0e62bcc",
+    "tests/conftest.py": "263c558a80adf638e34cb9b4772927df0be4a8a2b19eb28a77e006332634f13e",
+    "tests/test_cli.py": "47d798d67d1f8e1a3aa4d25cca1c7302e897d66c6171500e6b72465c84899d9b",
+    "tests/test_config.py": "825400e0a78c4bf6b8e2cb8df3776523c2992c7545a602939d52cf075e8c56fd",
+    "tests/test_contracts.py": "f871ff87391523f451b6045d1374011334dbf7679feecae5f875f8b0ae3b01a4",
+    "tests/test_engine_qualification.py": "de2c30868fb38252e95c35b25e6abb8fb33baedbffea5c80306d796c3b200903",
+    "tests/test_logging.py": "ca6076f2470dd5f9058a36e662b41b3b06265f0c1cea4526814b54e217db234c",
+    "tests/test_snapshots.py": "4a842a5a5fc152a2dce4e74ad57fecec698e52e44b32a607d3f26116a75e50b9",
+    "uv.lock": "bd6071ced275f50e22d0398ead15496c6fd57e46304a8c0128b40b8405b5bd03"
+  },
+  "versions": {
+    "buffetbot": "0.1.0",
+    "pydantic": "2.12.5",
+    "duckdb": "1.5.5",
+    "pyarrow": "25.0.1",
+    "pandas_market_calendars": "5.4.0",
+    "pytest": "9.1.1",
+    "ruff": "0.16.6"
+  },
+  "checks": [
+    {
+      "command": "uv run --locked --offline --group qualification pytest -q",
+      "returncode": 0,
+      "result": "199 passed in 35.66s; 49 snapshot tests and all 150 earlier cases."
+    },
+    {
+      "command": "uv run --locked --offline --group qualification ruff check src tests qualification examples/contracts/validate.py",
+      "returncode": 0,
+      "result": "All checks passed!"
+    },
+    {
+      "command": "uv run --locked --offline --group qualification ruff format --check src tests qualification examples/contracts/validate.py",
+      "returncode": 0,
+      "result": "27 files already formatted"
+    },
+    {
+      "command": "uv pip check",
+      "returncode": 0,
+      "result": "All 275 installed packages are compatible"
+    },
+    {
+      "command": "git diff --check",
+      "returncode": 0,
+      "result": "Passed after final documentation changes."
+    }
+  ],
+  "fixture_results": "BB-004-quality-reports.json",
+  "fresh_environment": {
+    "status": "passed",
+    "origin": "synthetic",
+    "dataset_id": "39138d9233ad4dc29ce1355a24f4c64aa0a4843f529ec0f91b49e1cb7882eba9",
+    "temporary_environment_removed": true,
+    "checks": [
+      {
+        "command": [
+          "/home/jack/.local/bin/uv",
+          "sync",
+          "--locked",
+          "--offline",
+          "--no-editable"
+        ],
+        "cwd": "/home/jack/Desktop/BuffetBot",
+        "returncode": 0,
+        "stdout": "",
+        "stderr": "Using CPython 3.12.3 interpreter at: /usr/bin/python3.12\nCreating virtual environment at: /tmp/buffetbot-bb004-fresh-5k3nsdfr/env\nResolved 279 packages in 0.80ms\n   Building buffetbot @ file:///home/jack/Desktop/BuffetBot\n      Built buffetbot @ file:///home/jack/Desktop/BuffetBot\nPrepared 1 package in 439ms\nInstalled 25 packages in 30ms\n + annotated-types==0.8.0\n + buffetbot==0.1.0 (from file:///home/jack/Desktop/BuffetBot)\n + duckdb==1.5.5\n + exchange-calendars==4.13.2\n + iniconfig==2.3.0\n + korean-lunar-calendar==0.4.0\n + numpy==2.4.6\n + packaging==26.3\n + pandas==2.3.3\n + pandas-market-calendars==5.4.0\n + pluggy==1.6.0\n + pyarrow==25.0.1\n + pydantic==2.12.5\n + pydantic-core==2.41.5\n + pygments==2.21.0\n + pyluach==2.3.0\n + pytest==9.1.1\n + python-dateutil==2.9.0.post0\n + pytz==2026.3.post1\n + ruff==0.16.6\n + six==1.17.0\n + toolz==1.1.0\n + typing-extensions==4.16.0\n + typing-inspection==0.4.4\n + tzdata==2026.3\n"
+      },
+      {
+        "command": [
+          "/tmp/buffetbot-bb004-fresh-5k3nsdfr/env/bin/buffetbot",
+          "datasets",
+          "fixture",
+          "--config",
+          "/tmp/buffetbot-bb004-fresh-5k3nsdfr/offline.toml"
+        ],
+        "cwd": "/tmp/buffetbot-bb004-fresh-5k3nsdfr",
+        "returncode": 0,
+        "stdout": "{\n  \"schema_version\": 1,\n  \"dataset_id\": \"39138d9233ad4dc29ce1355a24f4c64aa0a4843f529ec0f91b49e1cb7882eba9\",\n  \"origin\": \"synthetic\",\n  \"status\": \"verified\",\n  \"quality\": {\n    \"schema_version\": 1,\n    \"origin\": \"synthetic\",\n    \"usable\": true,\n    \"coverage\": [\n      {\n        \"symbol\": \"BBTEST\",\n        \"expected_bars\": 6,\n        \"observed_bars\": 6,\n        \"missing_sessions\": []\n      }\n    ],\n    \"expected_closures\": [\n      \"2024-07-04\",\n      \"2024-07-06\",\n      \"2024-07-07\"\n    ],\n    \"shortened_sessions\": [\n      \"2024-07-03\"\n    ],\n    \"findings\": [\n      {\n        \"severity\": \"warning\",\n        \"code\": \"synthetic_data\",\n        \"symbol\": null,\n        \"session\": null,\n        \"detail\": \"Fabricated fixture; not validated market history or trading performance.\"\n      }\n    ]\n  },\n  \"coverage\": [\n    {\n      \"symbol\": \"BBTEST\",\n      \"bars\": 6,\n      \"first_session\": \"2024-07-01\",\n      \"last_session\": \"2024-07-09\",\n      \"zero_volume_bars\": 0\n    }\n  ],\n  \"manifest\": {\n    \"schema_version\": 1,\n    \"storage_schema\": \"daily_market_snapshot.v1\",\n    \"plan\": {\n      \"schema_version\": 1,\n      \"schema_id\": \"market_observation.v1\",\n      \"origin\": \"synthetic\",\n      \"provider\": \"buffetbot_fixture\",\n      \"feed\": \"synthetic_daily\",\n      \"universe\": [\n        {\n          \"symbol\": \"BBTEST\",\n          \"asset_class\": \"us_etf\",\n          \"currency\": \"USD\",\n          \"exchange\": \"ARCA\",\n          \"calendar\": \"XNYS\",\n          \"timezone\": \"America/New_York\",\n          \"listed_on\": \"2000-01-01\",\n          \"delisted_on\": null\n        }\n      ],\n      \"interval\": \"1d\",\n      \"coverage_start\": \"2024-07-01\",\n      \"coverage_end\": \"2024-07-09\",\n      \"first_execution_session\": \"2024-07-02\",\n      \"warmup_sessions\": 1,\n      \"retrieved_at\": \"2026-09-08T00:00:00.000000Z\",\n      \"retrieval_convention\": \"Fabricated offline records; retained ingestion clock is explicit and is not historical capture.\",\n      \"availability_convention\": \"Synthetic completed raw bar becomes available 15 minutes after the NYSE regular close.\",\n      \"revision_policy\": \"point_in_time\",\n      \"limitations\": [\n        \"synthetic_data\",\n        \"fixed_declared_universe\"\n      ],\n      \"executable_adjustment\": \"raw\",\n      \"research_adjustment\": \"split_as_of_cutoff\",\n      \"zero_volume_policy\": \"allow_with_warning\",\n      \"corporate_actions_coverage\": \"complete\",\n      \"corporate_actions_source\": \"Synthetic fixture author explicitly declares exactly one forward split and one regular cash dividend for the full universe and coverage.\"\n    },\n    \"calendar_source\": \"pandas_market_calendars:NYSE\",\n    \"calendar_version\": \"5.4.0\",\n    \"parquet_writer\": \"pyarrow:25.0.1\",\n    \"files\": [\n      {\n        \"name\": \"bars.parquet\",\n        \"sha256\": \"556a5e3ad7fe15e2824b2ef3511fb7b9c7b9449f7fc0a3207abce557264e2a0b\",\n        \"rows\": 6,\n        \"size_bytes\": 6485\n      },\n      {\n        \"name\": \"actions.parquet\",\n        \"sha256\": \"2d104f71ada07292e875f77dcf56d34edfca1bc2586525b8033bb15a8afe5e25\",\n        \"rows\": 2,\n        \"size_bytes\": 3890\n      },\n      {\n        \"name\": \"sessions.parquet\",\n        \"sha256\": \"0e3c81f39496715b1c90ae396bbf30385a038545bb4e50e6afed7610cb1d26df\",\n        \"rows\": 6,\n        \"size_bytes\": 1439\n      }\n    ],\n    \"quality\": {\n      \"schema_version\": 1,\n      \"origin\": \"synthetic\",\n      \"usable\": true,\n      \"coverage\": [\n        {\n          \"symbol\": \"BBTEST\",\n          \"expected_bars\": 6,\n          \"observed_bars\": 6,\n          \"missing_sessions\": []\n        }\n      ],\n      \"expected_closures\": [\n        \"2024-07-04\",\n        \"2024-07-06\",\n        \"2024-07-07\"\n      ],\n      \"shortened_sessions\": [\n        \"2024-07-03\"\n      ],\n      \"findings\": [\n        {\n          \"severity\": \"warning\",\n          \"code\": \"synthetic_data\",\n          \"symbol\": null,\n          \"session\": null,\n          \"detail\": \"Fabricated fixture; not validated market history or trading performance.\"\n        }\n      ]\n    }\n  }\n}\n",
+        "stderr": "2026-09-08T00:32:36Z INFO buffetbot.datasets run=e3f6360d0f3442d8b58ad66d92bf3983 job=- Dataset operation completed: verified\n"
+      },
+      {
+        "command": [
+          "/tmp/buffetbot-bb004-fresh-5k3nsdfr/env/bin/buffetbot",
+          "doctor",
+          "--json",
+          "--config",
+          "/tmp/buffetbot-bb004-fresh-5k3nsdfr/offline.toml"
+        ],
+        "cwd": "/tmp/buffetbot-bb004-fresh-5k3nsdfr",
+        "returncode": 0,
+        "stdout": "{\n  \"status\": \"ready\",\n  \"scope\": \"local_configuration_only\",\n  \"run_id\": \"e92b5e00823d4089bdadf6980ed9e2dd\",\n  \"mode\": \"offline\",\n  \"config_file\": \"/tmp/buffetbot-bb004-fresh-5k3nsdfr/offline.toml\",\n  \"python\": \"3.12.3\",\n  \"paths\": {\n    \"state\": {\n      \"path\": \"/tmp/buffetbot-bb004-fresh-5k3nsdfr/state\",\n      \"exists\": false,\n      \"ready\": true,\n      \"detail\": \"Can create under an accessible parent.\"\n    },\n    \"data\": {\n      \"path\": \"/tmp/buffetbot-bb004-fresh-5k3nsdfr/data\",\n      \"exists\": true,\n      \"ready\": true,\n      \"detail\": \"Directory is accessible.\"\n    },\n    \"artifacts\": {\n      \"path\": \"/tmp/buffetbot-bb004-fresh-5k3nsdfr/artifacts\",\n      \"exists\": false,\n      \"ready\": true,\n      \"detail\": \"Can create under an accessible parent.\"\n    }\n  },\n  \"required_integrations\": [],\n  \"broker\": {\n    \"endpoint\": \"https://paper-api.alpaca.markets\",\n    \"credentials\": \"missing\",\n    \"missing_fields\": [\n      \"api_key\",\n      \"api_secret\"\n    ],\n    \"connectivity\": \"not_checked\"\n  }\n}\n",
+        "stderr": "2026-09-08T00:32:37Z INFO buffetbot.doctor run=e92b5e00823d4089bdadf6980ed9e2dd job=- Local configuration inspection completed: ready\n"
+      },
+      {
+        "command": [
+          "/tmp/buffetbot-bb004-fresh-5k3nsdfr/env/bin/python",
+          "-c",
+          "import buffetbot, importlib.util; from pathlib import Path; from buffetbot.fixtures import load_fixture; assert Path('/home/jack/Desktop/BuffetBot') not in Path(buffetbot.__file__).parents; assert importlib.util.find_spec(\"lumibot\") is None; assert importlib.util.find_spec(\"sklearn\") is None; assert len(load_fixture()[1]) == 6; print(\"Installed wheel includes offline fixtures; engine/model packages absent.\")"
+        ],
+        "cwd": "/tmp/buffetbot-bb004-fresh-5k3nsdfr",
+        "returncode": 0,
+        "stdout": "Installed wheel includes offline fixtures; engine/model packages absent.\n",
+        "stderr": ""
+      }
+    ]
+  },
+  "actual_provider_check": "Not run; BB-005",
+  "application_ledger_check": "Not run; BB-009",
+  "actual_broker_check": "Not run; BB-017/018"
+}

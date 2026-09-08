@@ -4,13 +4,15 @@ BuffetBot is a local application being built for trading research, numerical mac
 
 **Start with the [North Star](NORTHSTAR.md).** It defines the reviewed product direction, technical stack, architecture, MVP scope, operating boundaries, and completion criteria.
 
-The [development backlog](docs/development/README.md) contains 24 MVP stories. BB-001 implements the initial Python package, typed configuration, local doctor command, redacted logging, and configuration tests. BB-002 qualifies Lumibot using synthetic offline backtests and local broker transport tests. BB-003 implements shared data/strategy contracts and reproducible experiment specifications. Production strategies, data ingestion, model workflows, the broker connection, and browser dashboard remain later work.
+The [development backlog](docs/development/README.md) contains 24 MVP stories. BB-001 implements the initial Python package, typed configuration, local doctor command, redacted logging, and configuration tests. BB-002 qualifies Lumibot using synthetic offline backtests and local broker transport tests. BB-003 implements shared data/strategy contracts and reproducible experiment specifications. BB-004 adds immutable Parquet snapshots, calendar/quality validation, DuckDB inspection and packaged offline fixtures. Production strategies, provider ingestion, model workflows, the broker connection, and browser dashboard remain later work.
 
 [BB-001 verification evidence](docs/development/evidence/BB-001.md) records the clean-environment installation and passing checks.
 
 [BB-002 engine decision](docs/development/evidence/BB-002-engine-decision.md) adopts Lumibot 4.5.91 with demonstrated corrections for feature timing, dividend payments and partial-order restart import. It records the dependency/license findings and unrun actual paper checks.
 
 [BB-003 evidence](docs/development/evidence/BB-003.md) records validated units, data availability, source evidence, pending exposure, immutable specifications and separate run identities. The [contract guide](docs/contracts.md) documents the v1 interfaces and limits.
+
+[BB-004 evidence](docs/development/evidence/BB-004.md) records snapshot publication/reload, crash and corruption checks, explicit synthetic provenance and a fresh installed-package demonstration. The [dataset guide](docs/datasets.md) explains storage, quality policies and the independent accounting fixtures.
 
 ## Setup
 
@@ -31,7 +33,11 @@ uv run --locked buffetbot doctor --help
 uv run --locked buffetbot doctor --json
 uv run --locked buffetbot doctor --config config/paper.toml
 uv run --locked buffetbot doctor --config config/paper.toml --require-broker
+uv run --locked --offline buffetbot datasets fixture
+uv run --locked --offline buffetbot datasets inspect <dataset_id>
 ```
+
+`datasets fixture` publishes a synthetic dataset under the configured data directory and prints its ID, coverage and quality report. Replace `<dataset_id>` with that ID to verify and inspect it. Dataset commands always emit JSON; exit 1 means quality rejection, and exit 2 means invalid input/configuration or storage. See the [dataset guide](docs/datasets.md) for missing-bar, gap, zero-volume and incomplete-action cases.
 
 `doctor` resolves and inspects configuration and storage paths, reports missing credential fields, and emits logs with UTC timestamps, component, and run identity. It does not create runtime directories, authenticate with a broker, place orders, download data, or start models. A `ready` result means local configuration checks passed; it does not certify credentials or trading readiness.
 
@@ -53,7 +59,7 @@ The default file is [config/offline.toml](config/offline.toml). Supported TOML f
 | --- | --- | --- |
 | `mode` | `offline` | `offline` or `paper`; all other values are rejected |
 | `paths.state` | `../var/state` | Future operational state |
-| `paths.data` | `../var/data` | Future downloaded datasets |
+| `paths.data` | `../var/data` | Immutable local market snapshots; provider downloads follow in BB-005 |
 | `paths.artifacts` | `../var/artifacts` | Future experiment/model artifacts |
 | `broker.endpoint` | `https://paper-api.alpaca.markets` | Only this exact paper endpoint is accepted |
 
@@ -99,9 +105,11 @@ uv run --locked --offline --group qualification pytest -q
 
 The command writes `var/qualification/report.json`. It compares repeat ledgers, costs, splits, dividend entitlement/payment, completed observations, saved-model predictions, and the Alpaca software path with synthetic responses. It uses a temporary process with no inherited credentials or dotenv loading and denies Python networking. No account is contacted. A failed invariant exits nonzero; run without Python's `-O` option. Detailed results and limitations are in [BB-002 evidence](docs/development/evidence/BB-002.md).
 
-The group includes Lumibot's substantial upstream dependencies and a small scikit-learn artifact probe. Plain `uv sync --locked` returns to the small foundation environment. Always include `--group qualification` when running engine checks so uv retains those dependencies.
+The group includes Lumibot's substantial upstream dependencies and a small scikit-learn artifact probe. Plain `uv sync --locked` returns to the default application environment, including local data storage. Always include `--group qualification` when running engine checks so uv retains those dependencies.
 
-The application package remains in `src/buffetbot`; disposable engine experiments and reusable synthetic fixtures live in `qualification`. Configuration examples are in `config`, regressions in `tests`, and ignored runtime locations are described in [var/README.md](var/README.md).
+The snapshot tests cover publication/reimport, concurrent publishers, abrupt process exits, corrupt files, missing/session/listing/action data, explicit zero-volume handling, research cutoffs, and an offline CLI round trip.
+
+The application package remains in `src/buffetbot`, with packaged offline datasets and independent ledger expectations in `src/buffetbot/fixtures`. Disposable engine experiments and their original fixtures live in `qualification`. Configuration examples are in `config`, regressions in `tests`, and ignored runtime locations are described in [var/README.md](var/README.md).
 
 Supporting documents:
 

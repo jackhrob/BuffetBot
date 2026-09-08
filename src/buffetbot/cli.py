@@ -1,4 +1,4 @@
-"""Read-only local configuration inspection. No broker SDK or network calls."""
+"""Local configuration and offline data commands. No broker SDK or network calls."""
 
 import argparse
 import json
@@ -26,7 +26,7 @@ logger = logging.getLogger("buffetbot.doctor")
 class Parser(argparse.ArgumentParser):
     def error(self, message: str) -> None:
         # argparse normally echoes invalid arguments, which could contain pasted credentials.
-        self.exit(2, "Invalid command line. Run 'buffetbot doctor --help' for supported options.\n")
+        self.exit(2, "Invalid command line. Run 'buffetbot --help' for supported options.\n")
 
 
 def parser() -> argparse.ArgumentParser:
@@ -48,6 +48,22 @@ def parser() -> argparse.ArgumentParser:
     doctor.add_argument(
         "--json", action="store_true", help="Write a machine-readable report to stdout."
     )
+    datasets = subcommands.add_parser("datasets", help="Publish or inspect local snapshots (JSON).")
+    operations = datasets.add_subparsers(dest="dataset_command", required=True, parser_class=Parser)
+    fixture = operations.add_parser(
+        "fixture", help="Publish the packaged synthetic offline fixture."
+    )
+    fixture.add_argument(
+        "--case",
+        choices=("accounting", "missing_bar", "gap", "zero_volume", "incomplete_actions"),
+        default="accounting",
+    )
+    inspect = operations.add_parser(
+        "inspect", help="Verify a snapshot and report its coverage/quality."
+    )
+    inspect.add_argument("dataset_id")
+    for operation in (fixture, inspect):
+        operation.add_argument("--config", type=Path, default=Path("config/offline.toml"))
     return command
 
 
@@ -93,6 +109,16 @@ def main(argv: list[str] | None = None) -> int:
     known_secrets = [os.environ.get(name, "") for name in CREDENTIAL_ENV.values()]
     redactor = Redactor(known_secrets)
     configure_logging(redactor, run_id)
+    if arguments.command == "datasets":
+        # Keep heavy storage dependencies and filesystem writes out of the doctor path.
+        from buffetbot.datasets_cli import run
+
+        report, status = run(arguments)
+        emit(report, as_json=True, redactor=redactor)
+        logging.getLogger("buffetbot.datasets").info(
+            "Dataset operation completed: %s", report["status"]
+        )
+        return status
     try:
         credentials = load_credentials(arguments.secrets)
         redactor = Redactor([*known_secrets, *credentials.secret_values()])

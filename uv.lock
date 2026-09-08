@@ -359,6 +359,9 @@ name = "buffetbot"
 version = "0.1.0"
 source = { editable = "." }
 dependencies = [
+    { name = "duckdb" },
+    { name = "pandas-market-calendars" },
+    { name = "pyarrow" },
     { name = "pydantic" },
 ]
 
@@ -373,7 +376,12 @@ qualification = [
 ]
 
 [package.metadata]
-requires-dist = [{ name = "pydantic", specifier = ">=2.12,<3" }]
+requires-dist = [
+    { name = "duckdb", specifier = "==1.5.5" },
+    { name = "pandas-market-calendars", specifier = "==5.4.0" },
+    { name = "pyarrow", specifier = "==25.0.1" },
+    { name = "pydantic", specifier = ">=2.12,<3" },
+]
 
 [package.metadata.requires-dev]
 dev = [

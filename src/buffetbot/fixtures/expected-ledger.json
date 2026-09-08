@@ -1,0 +1,17 @@
+{
+  "schema_version": 1,
+  "origin": "synthetic",
+  "fixture": "accounting",
+  "convention": "After each listed event, holdings marked at that session's raw open; USD amounts.",
+  "initial_cash": "10000",
+  "commission_per_order": "1",
+  "adverse_cost_bps_per_side": "10",
+  "events": [
+    {"session": "2024-07-01", "event": "warmup", "cash": "10000", "shares": 0, "receivable": "0", "equity": "10000"},
+    {"session": "2024-07-02", "event": "buy_10_at_110.11", "cash": "8897.90", "shares": 10, "receivable": "0", "equity": "9997.90"},
+    {"session": "2024-07-03", "event": "split_2_for_1", "cash": "8897.90", "shares": 20, "receivable": "0", "equity": "10017.90"},
+    {"session": "2024-07-05", "event": "dividend_entitlement", "cash": "8897.90", "shares": 20, "receivable": "20", "equity": "10037.90"},
+    {"session": "2024-07-08", "event": "sell_20_at_59.94", "cash": "10095.70", "shares": 0, "receivable": "20", "equity": "10115.70"},
+    {"session": "2024-07-09", "event": "dividend_payment", "cash": "10115.70", "shares": 0, "receivable": "0", "equity": "10115.70"}
+  ]
+}

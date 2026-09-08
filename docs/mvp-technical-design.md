@@ -2,7 +2,7 @@
 
 The [North Star](../NORTHSTAR.md) is the reviewed primary product and architecture reference. The [development backlog](development/README.md) defines the implementation stories and release evidence. This document supplies supporting implementation detail; align it with the North Star if a conflict arises.
 
-Proposed September 7, 2026. This document describes the target architecture. [BB-001](development/01-project-foundation.md) provides the verified local Python/configuration foundation, [BB-002](development/02-engine-qualification.md) qualifies the engine with synthetic experiments, and [BB-003](development/03-contracts-and-experiments.md) implements the shared contracts. Production trading, model, and broker integration work remains planned. It refines the earlier [build proposal](build-proposal.md), particularly the engine choice and local model deployment.
+Proposed September 7, 2026. This document describes the target architecture. [BB-001](development/01-project-foundation.md) provides the verified local Python/configuration foundation, [BB-002](development/02-engine-qualification.md) qualifies the engine with synthetic experiments, [BB-003](development/03-contracts-and-experiments.md) implements the shared contracts, and [BB-004](development/04-dataset-snapshots.md) implements local market snapshots and offline fixtures. Actual provider ingestion, production trading, model, and broker integration work remains planned. It refines the earlier [build proposal](build-proposal.md), particularly the engine choice and local model deployment.
 
 ## Product boundary
 
@@ -67,7 +67,7 @@ Persist datasets, artifacts, and operational state on mounted local volumes. Bin
 
 ## Contracts that make strategies replaceable
 
-The implemented v1 records, binding checks, canonical experiment identity and examples are documented in the [contract guide](contracts.md). Storage, policy formulas and provider/engine adapters remain later integrations against that boundary.
+The implemented v1 records, binding checks, canonical experiment identity and examples are documented in the [contract guide](contracts.md). The [dataset guide](datasets.md) documents immutable market storage, quality checks and verified experiment binding. Job/artifact storage, policy formulas and provider/engine adapters remain later integrations against that boundary.
 
 | Record | Required meaning |
 | --- | --- |

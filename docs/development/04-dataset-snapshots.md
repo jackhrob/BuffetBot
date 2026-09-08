@@ -1,6 +1,7 @@
 # BB-004 — Dataset snapshots, quality checks, and offline fixtures
 
-**Status:** Not started  
+**Status:** Done — [completion evidence](evidence/BB-004.md)
+
 **Depends on:** [BB-003](03-contracts-and-experiments.md)  
 **North Star:** Data and research integrity; offline demonstration
 

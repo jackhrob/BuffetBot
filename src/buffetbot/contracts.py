@@ -188,7 +188,9 @@ class StrategyDefinition(Record):
         return self
 
 
-class MarketObservation(VersionedRecord):
+class MarketBar(VersionedRecord):
+    """Normalized source row, before a snapshot identity has been assigned."""
+
     symbol: Symbol
     session: Session
     interval: Literal["1d"] = "1d"
@@ -196,7 +198,6 @@ class MarketObservation(VersionedRecord):
     interval_end: Timestamp
     available_at: Timestamp
     first_ingested_at: Timestamp
-    dataset_id: Digest
     provider: Identifier
     feed: Identifier
     revision_id: Identifier
@@ -228,6 +229,12 @@ class MarketObservation(VersionedRecord):
         if not self.low <= min(self.open, self.close) <= max(self.open, self.close) <= self.high:
             raise ValueError("Raw OHLC must satisfy low <= open/close <= high")
         return self
+
+
+class MarketObservation(MarketBar):
+    """A source bar bound to a verified, immutable snapshot."""
+
+    dataset_id: Digest
 
 
 class FeatureValue(Record):

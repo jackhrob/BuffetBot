@@ -1,0 +1,438 @@
+{
+  "schema_version": 1,
+  "origin": "synthetic",
+  "cases": {
+    "accounting": {
+      "command": [
+        "/home/jack/.local/bin/uv",
+        "run",
+        "--locked",
+        "--offline",
+        "--group",
+        "qualification",
+        "buffetbot",
+        "datasets",
+        "fixture",
+        "--case",
+        "accounting"
+      ],
+      "returncode": 0,
+      "report": {
+        "schema_version": 1,
+        "dataset_id": "39138d9233ad4dc29ce1355a24f4c64aa0a4843f529ec0f91b49e1cb7882eba9",
+        "origin": "synthetic",
+        "status": "verified",
+        "quality": {
+          "schema_version": 1,
+          "origin": "synthetic",
+          "usable": true,
+          "coverage": [
+            {
+              "symbol": "BBTEST",
+              "expected_bars": 6,
+              "observed_bars": 6,
+              "missing_sessions": []
+            }
+          ],
+          "expected_closures": [
+            "2024-07-04",
+            "2024-07-06",
+            "2024-07-07"
+          ],
+          "shortened_sessions": [
+            "2024-07-03"
+          ],
+          "findings": [
+            {
+              "severity": "warning",
+              "code": "synthetic_data",
+              "symbol": null,
+              "session": null,
+              "detail": "Fabricated fixture; not validated market history or trading performance."
+            }
+          ]
+        },
+        "coverage": [
+          {
+            "symbol": "BBTEST",
+            "bars": 6,
+            "first_session": "2024-07-01",
+            "last_session": "2024-07-09",
+            "zero_volume_bars": 0
+          }
+        ],
+        "manifest": {
+          "schema_version": 1,
+          "storage_schema": "daily_market_snapshot.v1",
+          "plan": {
+            "schema_version": 1,
+            "schema_id": "market_observation.v1",
+            "origin": "synthetic",
+            "provider": "buffetbot_fixture",
+            "feed": "synthetic_daily",
+            "universe": [
+              {
+                "symbol": "BBTEST",
+                "asset_class": "us_etf",
+                "currency": "USD",
+                "exchange": "ARCA",
+                "calendar": "XNYS",
+                "timezone": "America/New_York",
+                "listed_on": "2000-01-01",
+                "delisted_on": null
+              }
+            ],
+            "interval": "1d",
+            "coverage_start": "2024-07-01",
+            "coverage_end": "2024-07-09",
+            "first_execution_session": "2024-07-02",
+            "warmup_sessions": 1,
+            "retrieved_at": "2026-09-08T00:00:00.000000Z",
+            "retrieval_convention": "Fabricated offline records; retained ingestion clock is explicit and is not historical capture.",
+            "availability_convention": "Synthetic completed raw bar becomes available 15 minutes after the NYSE regular close.",
+            "revision_policy": "point_in_time",
+            "limitations": [
+              "synthetic_data",
+              "fixed_declared_universe"
+            ],
+            "executable_adjustment": "raw",
+            "research_adjustment": "split_as_of_cutoff",
+            "zero_volume_policy": "allow_with_warning",
+            "corporate_actions_coverage": "complete",
+            "corporate_actions_source": "Synthetic fixture author explicitly declares exactly one forward split and one regular cash dividend for the full universe and coverage."
+          },
+          "calendar_source": "pandas_market_calendars:NYSE",
+          "calendar_version": "5.4.0",
+          "parquet_writer": "pyarrow:25.0.1",
+          "files": [
+            {
+              "name": "bars.parquet",
+              "sha256": "556a5e3ad7fe15e2824b2ef3511fb7b9c7b9449f7fc0a3207abce557264e2a0b",
+              "rows": 6,
+              "size_bytes": 6485
+            },
+            {
+              "name": "actions.parquet",
+              "sha256": "2d104f71ada07292e875f77dcf56d34edfca1bc2586525b8033bb15a8afe5e25",
+              "rows": 2,
+              "size_bytes": 3890
+            },
+            {
+              "name": "sessions.parquet",
+              "sha256": "0e3c81f39496715b1c90ae396bbf30385a038545bb4e50e6afed7610cb1d26df",
+              "rows": 6,
+              "size_bytes": 1439
+            }
+          ],
+          "quality": {
+            "schema_version": 1,
+            "origin": "synthetic",
+            "usable": true,
+            "coverage": [
+              {
+                "symbol": "BBTEST",
+                "expected_bars": 6,
+                "observed_bars": 6,
+                "missing_sessions": []
+              }
+            ],
+            "expected_closures": [
+              "2024-07-04",
+              "2024-07-06",
+              "2024-07-07"
+            ],
+            "shortened_sessions": [
+              "2024-07-03"
+            ],
+            "findings": [
+              {
+                "severity": "warning",
+                "code": "synthetic_data",
+                "symbol": null,
+                "session": null,
+                "detail": "Fabricated fixture; not validated market history or trading performance."
+              }
+            ]
+          }
+        }
+      }
+    },
+    "missing_bar": {
+      "command": [
+        "/home/jack/.local/bin/uv",
+        "run",
+        "--locked",
+        "--offline",
+        "--group",
+        "qualification",
+        "buffetbot",
+        "datasets",
+        "fixture",
+        "--case",
+        "missing_bar"
+      ],
+      "returncode": 1,
+      "report": {
+        "status": "rejected",
+        "origin": "synthetic",
+        "error": "Dataset failed quality checks; correct the input and publish a new snapshot.",
+        "quality": {
+          "schema_version": 1,
+          "origin": "synthetic",
+          "usable": false,
+          "coverage": [
+            {
+              "symbol": "BBTEST",
+              "expected_bars": 6,
+              "observed_bars": 5,
+              "missing_sessions": [
+                "2024-07-05"
+              ]
+            }
+          ],
+          "expected_closures": [
+            "2024-07-04",
+            "2024-07-06",
+            "2024-07-07"
+          ],
+          "shortened_sessions": [
+            "2024-07-03"
+          ],
+          "findings": [
+            {
+              "severity": "error",
+              "code": "missing_bars",
+              "symbol": "BBTEST",
+              "session": null,
+              "detail": "Expected listed sessions are missing; no forward fill is allowed."
+            },
+            {
+              "severity": "warning",
+              "code": "synthetic_data",
+              "symbol": null,
+              "session": null,
+              "detail": "Fabricated fixture; not validated market history or trading performance."
+            }
+          ]
+        }
+      }
+    },
+    "gap": {
+      "command": [
+        "/home/jack/.local/bin/uv",
+        "run",
+        "--locked",
+        "--offline",
+        "--group",
+        "qualification",
+        "buffetbot",
+        "datasets",
+        "fixture",
+        "--case",
+        "gap"
+      ],
+      "returncode": 0,
+      "report": {
+        "schema_version": 1,
+        "dataset_id": "f8b923a1e318969a4d6bde0fb15755329a54481b8080519cdda3a886414ad2dd",
+        "origin": "synthetic",
+        "status": "verified",
+        "quality": {
+          "schema_version": 1,
+          "origin": "synthetic",
+          "usable": true,
+          "coverage": [
+            {
+              "symbol": "BBTEST",
+              "expected_bars": 6,
+              "observed_bars": 6,
+              "missing_sessions": []
+            }
+          ],
+          "expected_closures": [
+            "2024-07-04",
+            "2024-07-06",
+            "2024-07-07"
+          ],
+          "shortened_sessions": [
+            "2024-07-03"
+          ],
+          "findings": [
+            {
+              "severity": "warning",
+              "code": "large_opening_gap",
+              "symbol": "BBTEST",
+              "session": "2024-07-08",
+              "detail": "Opening gap is at least 20% after declared splits; review source data."
+            },
+            {
+              "severity": "warning",
+              "code": "large_opening_gap",
+              "symbol": "BBTEST",
+              "session": "2024-07-09",
+              "detail": "Opening gap is at least 20% after declared splits; review source data."
+            },
+            {
+              "severity": "warning",
+              "code": "synthetic_data",
+              "symbol": null,
+              "session": null,
+              "detail": "Fabricated fixture; not validated market history or trading performance."
+            }
+          ]
+        },
+        "coverage": [
+          {
+            "symbol": "BBTEST",
+            "bars": 6,
+            "first_session": "2024-07-01",
+            "last_session": "2024-07-09",
+            "zero_volume_bars": 0
+          }
+        ]
+      }
+    },
+    "zero_volume": {
+      "command": [
+        "/home/jack/.local/bin/uv",
+        "run",
+        "--locked",
+        "--offline",
+        "--group",
+        "qualification",
+        "buffetbot",
+        "datasets",
+        "fixture",
+        "--case",
+        "zero_volume"
+      ],
+      "returncode": 0,
+      "report": {
+        "schema_version": 1,
+        "dataset_id": "dc6a1ca29f18be41162d718f3c6cf9e649963917c68e3c51b4187bf00dc771f4",
+        "origin": "synthetic",
+        "status": "verified",
+        "quality": {
+          "schema_version": 1,
+          "origin": "synthetic",
+          "usable": true,
+          "coverage": [
+            {
+              "symbol": "BBTEST",
+              "expected_bars": 6,
+              "observed_bars": 6,
+              "missing_sessions": []
+            }
+          ],
+          "expected_closures": [
+            "2024-07-04",
+            "2024-07-06",
+            "2024-07-07"
+          ],
+          "shortened_sessions": [
+            "2024-07-03"
+          ],
+          "findings": [
+            {
+              "severity": "warning",
+              "code": "zero_volume",
+              "symbol": "BBTEST",
+              "session": "2024-07-08",
+              "detail": "Zero volume retained explicitly; no liquidity is inferred."
+            },
+            {
+              "severity": "warning",
+              "code": "synthetic_data",
+              "symbol": null,
+              "session": null,
+              "detail": "Fabricated fixture; not validated market history or trading performance."
+            }
+          ]
+        },
+        "coverage": [
+          {
+            "symbol": "BBTEST",
+            "bars": 6,
+            "first_session": "2024-07-01",
+            "last_session": "2024-07-09",
+            "zero_volume_bars": 1
+          }
+        ]
+      }
+    },
+    "incomplete_actions": {
+      "command": [
+        "/home/jack/.local/bin/uv",
+        "run",
+        "--locked",
+        "--offline",
+        "--group",
+        "qualification",
+        "buffetbot",
+        "datasets",
+        "fixture",
+        "--case",
+        "incomplete_actions"
+      ],
+      "returncode": 1,
+      "report": {
+        "status": "rejected",
+        "origin": "synthetic",
+        "error": "Dataset failed quality checks; correct the input and publish a new snapshot.",
+        "quality": {
+          "schema_version": 1,
+          "origin": "synthetic",
+          "usable": false,
+          "coverage": [
+            {
+              "symbol": "BBTEST",
+              "expected_bars": 6,
+              "observed_bars": 6,
+              "missing_sessions": []
+            }
+          ],
+          "expected_closures": [
+            "2024-07-04",
+            "2024-07-06",
+            "2024-07-07"
+          ],
+          "shortened_sessions": [
+            "2024-07-03"
+          ],
+          "findings": [
+            {
+              "severity": "error",
+              "code": "incomplete_actions",
+              "symbol": null,
+              "session": null,
+              "detail": "Complete split/dividend metadata or explicit no-action source coverage is required."
+            },
+            {
+              "severity": "warning",
+              "code": "synthetic_data",
+              "symbol": null,
+              "session": null,
+              "detail": "Fabricated fixture; not validated market history or trading performance."
+            }
+          ]
+        }
+      }
+    }
+  },
+  "inspect": {
+    "command": [
+      "/home/jack/.local/bin/uv",
+      "run",
+      "--locked",
+      "--offline",
+      "--group",
+      "qualification",
+      "buffetbot",
+      "datasets",
+      "inspect",
+      "39138d9233ad4dc29ce1355a24f4c64aa0a4843f529ec0f91b49e1cb7882eba9"
+    ],
+    "returncode": 0,
+    "equals_published_report": true
+  }
+}
