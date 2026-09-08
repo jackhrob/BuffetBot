@@ -1,4 +1,4 @@
-"""Local configuration and offline data commands. No broker SDK or network calls."""
+"""Local tooling and explicit historical data imports; no trading operations."""
 
 import argparse
 import json
@@ -48,7 +48,9 @@ def parser() -> argparse.ArgumentParser:
     doctor.add_argument(
         "--json", action="store_true", help="Write a machine-readable report to stdout."
     )
-    datasets = subcommands.add_parser("datasets", help="Publish or inspect local snapshots (JSON).")
+    datasets = subcommands.add_parser(
+        "datasets", help="Publish, import or inspect datasets (JSON)."
+    )
     operations = datasets.add_subparsers(dest="dataset_command", required=True, parser_class=Parser)
     fixture = operations.add_parser(
         "fixture", help="Publish the packaged synthetic offline fixture."
@@ -62,7 +64,27 @@ def parser() -> argparse.ArgumentParser:
         "inspect", help="Verify a snapshot and report its coverage/quality."
     )
     inspect.add_argument("dataset_id")
-    for operation in (fixture, inspect):
+    ingest = operations.add_parser(
+        "ingest", help="Import Alpaca history or reuse its verified cache (JSON)."
+    )
+    ingest.add_argument(
+        "--request", type=Path, required=True, help="Explicit historical request JSON."
+    )
+    ingest.add_argument("--secrets", type=Path, help="Explicit local Alpaca secrets TOML.")
+    caching = ingest.add_mutually_exclusive_group()
+    caching.add_argument(
+        "--refresh",
+        action="store_true",
+        help="Fetch a new complete version; preserve previous snapshots.",
+    )
+    caching.add_argument(
+        "--cache-only", action="store_true", help="Require a verified cached result; never connect."
+    )
+    replay = operations.add_parser(
+        "replay", help="Publish a retained original response capture without network access."
+    )
+    replay.add_argument("capture_id")
+    for operation in (fixture, inspect, ingest, replay):
         operation.add_argument("--config", type=Path, default=Path("config/offline.toml"))
     return command
 
@@ -113,7 +135,20 @@ def main(argv: list[str] | None = None) -> int:
         # Keep heavy storage dependencies and filesystem writes out of the doctor path.
         from buffetbot.datasets_cli import run
 
-        report, status = run(arguments)
+        credentials = None
+        if arguments.dataset_command == "ingest":
+            try:
+                credentials = load_credentials(arguments.secrets)
+            except ConfigurationError as error:
+                emit(
+                    {"status": "invalid", "origin": "unverified", "error": str(error)},
+                    as_json=True,
+                    redactor=redactor,
+                )
+                return 2
+            redactor = Redactor([*known_secrets, *credentials.secret_values()])
+            configure_logging(redactor, run_id)
+        report, status = run(arguments, credentials=credentials)
         emit(report, as_json=True, redactor=redactor)
         logging.getLogger("buffetbot.datasets").info(
             "Dataset operation completed: %s", report["status"]

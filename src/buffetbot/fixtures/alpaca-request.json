@@ -1,0 +1,16 @@
+{
+  "schema_version": 1,
+  "universe": [
+    {"symbol": "BBTEST", "exchange": "ARCA", "listed_on": "2000-01-01"},
+    {"symbol": "ZZTEST", "exchange": "ARCA", "listed_on": "2000-01-01"}
+  ],
+  "start_session": "2024-07-02",
+  "end_session": "2024-07-03",
+  "first_execution_session": "2024-07-03",
+  "warmup_sessions": 1,
+  "interval": "1d",
+  "feed": "sip",
+  "adjustment": "raw",
+  "aggregation": "regular_session_from_1min",
+  "zero_volume_policy": "reject"
+}

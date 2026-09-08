@@ -1,0 +1,12 @@
+{
+  "forward_splits": [{
+    "id": "synthetic-split", "symbol": "BBTEST", "cusip": "SYNTHETIC",
+    "new_rate": 2, "old_rate": 1, "process_date": "2024-06-28",
+    "ex_date": "2024-07-03", "record_date": "2024-07-02", "payable_date": "2024-07-03"
+  }],
+  "cash_dividends": [{
+    "id": "synthetic-dividend", "symbol": "BBTEST", "cusip": "SYNTHETIC",
+    "rate": 1, "special": false, "foreign": false, "process_date": "2024-07-09",
+    "ex_date": "2024-07-03", "record_date": "2024-07-03", "payable_date": "2024-07-09"
+  }]
+}

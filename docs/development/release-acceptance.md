@@ -18,7 +18,7 @@ For each row, record **Passed**, **Failed**, **Not run**, or **Blocked**, the co
 | Engine qualification | Supplied-data timing, costs, split/dividend accounting, saved-model loading, and required adapter paths are demonstrated | BB-002, BB-009 | Not run for full integration; BB-002 passed |
 | Contract validation | Invalid units/weights/times and incompatible schemas fail explicitly; targets are isolated from broker authority | BB-003, BB-007, BB-008 | Not run for full integration; BB-003 passed |
 | Immutable data | Snapshots survive refreshes unchanged; corrupt/incomplete snapshots are rejected; fixture origin stays visible | BB-004 | Passed — [synthetic evidence](evidence/BB-004.md) |
-| Actual market ingestion | A real provider download has verified coverage, feed, action treatment, and cached provenance | BB-005 | Not run |
+| Actual market ingestion | A real provider download has verified coverage, feed, action treatment, and cached provenance | BB-005 | Blocked — credentials missing; [offline adapter evidence](evidence/BB-005.md) passed |
 | Durable jobs | Browser retries, child failures, and worker restarts preserve honest job states and artifacts | BB-006, BB-011 | Not run |
 | Single worker | Two processes sharing the deployment state cannot both submit broker orders; owner death permits controlled recovery | BB-006, BB-020, BB-022 | Not run |
 | Independent accounting | Cash, positions, fees, split, dividend, gap, and final open-order cases match independent expectations | BB-008, BB-009 | Not run |

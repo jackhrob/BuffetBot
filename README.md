@@ -4,7 +4,7 @@ BuffetBot is a local application being built for trading research, numerical mac
 
 **Start with the [North Star](NORTHSTAR.md).** It defines the reviewed product direction, technical stack, architecture, MVP scope, operating boundaries, and completion criteria.
 
-The [development backlog](docs/development/README.md) contains 24 MVP stories. BB-001 implements the initial Python package, typed configuration, local doctor command, redacted logging, and configuration tests. BB-002 qualifies Lumibot using synthetic offline backtests and local broker transport tests. BB-003 implements shared data/strategy contracts and reproducible experiment specifications. BB-004 adds immutable Parquet snapshots, calendar/quality validation, DuckDB inspection and packaged offline fixtures. Production strategies, provider ingestion, model workflows, the broker connection, and browser dashboard remain later work.
+The [development backlog](docs/development/README.md) contains 24 MVP stories. BB-001 implements the initial Python package, typed configuration, local doctor command, redacted logging, and configuration tests. BB-002 qualifies Lumibot using synthetic offline backtests and local broker transport tests. BB-003 implements shared data/strategy contracts and reproducible experiment specifications. BB-004 adds immutable Parquet snapshots, calendar/quality validation, DuckDB inspection and packaged offline fixtures. BB-005 implements historical import/cache/replay with passing synthetic tests; actual provider verification awaits credentials. Production strategies, model workflows, the broker connection, and browser dashboard remain later work.
 
 [BB-001 verification evidence](docs/development/evidence/BB-001.md) records the clean-environment installation and passing checks.
 
@@ -35,9 +35,14 @@ uv run --locked buffetbot doctor --config config/paper.toml
 uv run --locked buffetbot doctor --config config/paper.toml --require-broker
 uv run --locked --offline buffetbot datasets fixture
 uv run --locked --offline buffetbot datasets inspect <dataset_id>
+uv run --locked buffetbot datasets ingest --request config/history-spy.json --secrets config/secrets.local.toml
+uv run --locked --offline buffetbot datasets ingest --request config/history-spy.json --cache-only
+uv run --locked --offline buffetbot datasets replay <capture_id>
 ```
 
 `datasets fixture` publishes a synthetic dataset under the configured data directory and prints its ID, coverage and quality report. Replace `<dataset_id>` with that ID to verify and inspect it. Dataset commands always emit JSON; exit 1 means quality rejection, and exit 2 means invalid input/configuration or storage. See the [dataset guide](docs/datasets.md) for missing-bar, gap, zero-volume and incomplete-action cases.
+
+`datasets ingest` reuses verified cached history or makes an explicit read-only Alpaca download; `--refresh` requests a new complete version. It returns exit 1 for blocked access or rejected data. `--cache-only` prohibits the connection. uv's `--offline` only controls dependency resolution. `datasets replay` rebuilds a snapshot from its retained original responses without network access. The [market-data guide](docs/market-data.md) explains source/feed/availability limitations and the pending real-provider check ([BB-005 evidence](docs/development/evidence/BB-005.md)).
 
 `doctor` resolves and inspects configuration and storage paths, reports missing credential fields, and emits logs with UTC timestamps, component, and run identity. It does not create runtime directories, authenticate with a broker, place orders, download data, or start models. A `ready` result means local configuration checks passed; it does not certify credentials or trading readiness.
 
@@ -59,7 +64,7 @@ The default file is [config/offline.toml](config/offline.toml). Supported TOML f
 | --- | --- | --- |
 | `mode` | `offline` | `offline` or `paper`; all other values are rejected |
 | `paths.state` | `../var/state` | Future operational state |
-| `paths.data` | `../var/data` | Immutable local market snapshots; provider downloads follow in BB-005 |
+| `paths.data` | `../var/data` | Immutable snapshots, original market-response captures and import-cache receipts |
 | `paths.artifacts` | `../var/artifacts` | Future experiment/model artifacts |
 | `broker.endpoint` | `https://paper-api.alpaca.markets` | Only this exact paper endpoint is accepted |
 
@@ -108,6 +113,8 @@ The command writes `var/qualification/report.json`. It compares repeat ledgers, 
 The group includes Lumibot's substantial upstream dependencies and a small scikit-learn artifact probe. Plain `uv sync --locked` returns to the default application environment, including local data storage. Always include `--group qualification` when running engine checks so uv retains those dependencies.
 
 The snapshot tests cover publication/reimport, concurrent publishers, abrupt process exits, corrupt files, missing/session/listing/action data, explicit zero-volume handling, research cutoffs, and an offline CLI round trip.
+
+The ingestion tests add pagination, precise minute aggregation, source/capture binding, refresh/replay, interrupted imports, corrupt caches, unsupported actions, bounded HTTP retries, fixed GET endpoints and credential redaction. Run `uv run --locked --offline python examples/ingestion/validate.py` for the synthetic import demonstration. It does not verify provider entitlement or real prices.
 
 The application package remains in `src/buffetbot`, with packaged offline datasets and independent ledger expectations in `src/buffetbot/fixtures`. Disposable engine experiments and their original fixtures live in `qualification`. Configuration examples are in `config`, regressions in `tests`, and ignored runtime locations are described in [var/README.md](var/README.md).
 

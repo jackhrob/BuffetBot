@@ -1,0 +1,165 @@
+{
+  "schema_version": 1,
+  "story": "BB-005",
+  "implementation_verification": "passed",
+  "story_complete": false,
+  "actual_provider_verification": "blocked_missing_credentials",
+  "evidence_origin": "synthetic",
+  "verified_at": "2026-09-08T01:27:52.617041+00:00",
+  "base_git_revision": "2b042a10d62a6e03d004b3a2d6bd08cfa1375390",
+  "working_tree_changes_included": true,
+  "source_sha256": {
+    "NORTHSTAR.md": "2f01c98e0b4074dec9f5572373c6200b884f0f8148127a5ef455afd6c54d2130",
+    "README.md": "8db585dfa10094d5fc619fd18efdf217820452570c3d0fbff16bf1aec6978138",
+    "config/history-spy.json": "da98a58ee05f896666d096c84adebf9c18b9044180f612dae149626a2b4f6488",
+    "config/offline.toml": "cfdfbb9a9415cf80a736d3be2db914f8d0afc8524221385b51f08c1dd830d642",
+    "config/paper.toml": "acd85edf7684974da581fcac8bf263f1c4d2a576707b453b0e55ef86f09dbfb4",
+    "config/secrets.example.toml": "cf3e0b164d8588e2e212e33afd1f7a9f5fd7927371c37e4db30d04dca0e2f706",
+    "docs/development/05-market-data-ingestion.md": "b11db0223847ed78be1a7f0e2e37fe7f5048a0a16264c45336739d527875b86c",
+    "docs/development/README.md": "2dda580f55b98cfa2a22c434d99c2fee313999cf2d1eca97cd94c42897549e50",
+    "docs/development/evidence/BB-005-provider-check.json": "dcaa8af54d74dceec01e01e65dfbfc951b5e63843c832c286aeef190ed550b7a",
+    "docs/development/evidence/BB-005-synthetic-demo.json": "cd200973d9300a6b2e577524e9656ab4c1b6c7cc32edb7dc54bc1a3e6c6ba97f",
+    "docs/development/evidence/BB-005.md": "321bf739fbd52b4c28ac756d443b842826a5cea2c261c4bcead45500474197c2",
+    "docs/development/release-acceptance.md": "7a438a4b9280f3050551754ee20277bc844d396a8a7308dbbd7a02b424b373ff",
+    "docs/market-data.md": "fedb2deb7f5a5083d3c980ccaba54d9bfe9997ad30aedf324bbc6d019532e126",
+    "docs/mvp-technical-design.md": "cfe09e702faf69d954fc75c7e015c4061a77bbe67d628cd114719c5d96e71276",
+    "examples/contracts/README.md": "72af7dc5bd6650f039c20f1d32962166e196955aa82a1c26a9a221efbbc40fab",
+    "examples/contracts/context.json": "428c0d3bcfa689b50f77d8c8940e98642bb98372cbf4bb41d2b3bfc23c16425c",
+    "examples/contracts/execution-event.json": "749b582913ae06a445cbbad44b11ada23459b157a18cdca11f271906ca0c64a0",
+    "examples/contracts/experiment.json": "9ef50bd53e39c06ba6b7fbc9ef639dc46892e0a253998c4cb1d4afd0db9f2e17",
+    "examples/contracts/targets.json": "2167df40d9f57eb4161c7deee1b4462e6b992578e06a2cc59a6072163198a917",
+    "examples/contracts/validate.py": "cdaa42acf6d4dcd166c1966ac8cee82f85696a6c6d7cec3af462088a8be25199",
+    "examples/ingestion/validate.py": "57c26e381cedd382848b6d6ab0b54d1b1e5f0ec50cf2917c8230a5bafea58b54",
+    "pyproject.toml": "252894a3968ec93b78fa8aaef2e9cfc33889a0ba7a59e764b9aa889da5b379a2",
+    "qualification/__init__.py": "1ee27a890a15b270df95455a5afd5d81d9714fa1a82e3ae71c8c333776f43fd7",
+    "qualification/__main__.py": "21abee43d948cbeacc66ef75ba43ed4f44b502e62ffa966b6784ccda1c7732e0",
+    "qualification/adapters.py": "1a4290ccbbfdb5694164b9bdabc6be0bce75ab69889962c2d33175d3ff5360d0",
+    "qualification/backtest.py": "b9a2bf7751f226346bf67e27e4b402300b8d98e3a292d5d78c89b981c4ad4e14",
+    "qualification/fixtures/daily.csv": "25cbeae7cc1773abd0892b15f8aa979a32ffcb120cc15fe4030a368f3cec0883",
+    "qualification/fixtures/dividends.json": "36c5dbd422c1fe998627ab3ccbb9750df6d8ccff04eae678c9eeb50af1cb56a0",
+    "qualification/fixtures/expected.json": "f7f04fc9f22c5dc9bd0a7d1edb68c13b0c4c677728451aafc6f9d615f003e67d",
+    "qualification/fixtures/features.csv": "f6f78403c43b89be6524bb1e281e3551c8f79f135d901077633004233e25d517",
+    "qualification/paper.py": "5a70ca70f1cd28154b22daeafe0d1f66e325aa6f60cee566e3ffd72bf6f976df",
+    "qualification/run.py": "f9e7ffd737cc90603f88b2fe26aed5889c6a97f3a906fbddce648817640b016d",
+    "src/buffetbot/__init__.py": "bb84c71a3550b99a819610278908c65fba0c524503b6b0d0055c0f53d061c34f",
+    "src/buffetbot/__main__.py": "b24f11b2aff855097208b95dc4a183ef0d48a0bf3b5b91c32295cf3c174b353b",
+    "src/buffetbot/alpaca_history.py": "89f5ecfc9a0db7066ab05e4ff1b0220320ca33d2668c05f0daaba1f5b8df8711",
+    "src/buffetbot/cli.py": "8a367a11f5082bad982a7c8f45499aa88a46faf42474c49d5fbd7ecec284efe0",
+    "src/buffetbot/config.py": "406561b34116288822632a32e269f688480864b83da2d943b79a3b78e65abdfc",
+    "src/buffetbot/contracts.py": "837407639238690be4f7047daeb12e6e9680876abd2c63b1094b44a99a0e5472",
+    "src/buffetbot/dataset_models.py": "a369b59242f88cd29a77c8ff9df96dbad7e434ae8bb02388352f851713a581bb",
+    "src/buffetbot/dataset_quality.py": "af2dea1007e2b9735037048e3c1b904d3adcbe4c24e93d942a973aac8cdd43b7",
+    "src/buffetbot/datasets_cli.py": "b659ea1ab25d32115af1aff13169cd795b3690c50757f4ccf6a0bb9138de5cf0",
+    "src/buffetbot/experiments.py": "2bf5a79c406dbf8683ed8bc93ad7e1968433fcefdeff4e8a664bdbe4084dba8b",
+    "src/buffetbot/fixtures/README.md": "2aa79213e9fd479658e656669a4e34bdb45140bab19f0baa862ca3e9a9826357",
+    "src/buffetbot/fixtures/__init__.py": "a41ce54414e3bb4e533a354819ef215fa8e5052755fb6b3c20de9ce2a380ef09",
+    "src/buffetbot/fixtures/accounting.json": "30a498e98b1ab9de3ad8d96ee1b2fd9f74f2d0478b738a918b675a484e676603",
+    "src/buffetbot/fixtures/alpaca-actions.json": "e91e1de06d02d7a389abcdd28cf8440b288e2d2cf1d9d9a0e84ded74d5d1945a",
+    "src/buffetbot/fixtures/alpaca-bars.csv": "b3e39d0d599084c8a1715a05ee809e280fdb57bcc18ec4f58b53c5e5e697dd9f",
+    "src/buffetbot/fixtures/alpaca-request.json": "a140d74faccf15e7b6978887e6937edb6f6797e39c104932e4233d9958b12623",
+    "src/buffetbot/fixtures/alpaca.py": "ff81eddee06e505ea4cbb943e27d42f6d2bbf1f269ef2230f2bfe3cedf67b6fa",
+    "src/buffetbot/fixtures/cases.json": "c020d48980ac7e746301ea481a7aa0ccb47e2a7ec3448cb0786fb82878b3c275",
+    "src/buffetbot/fixtures/expected-ledger.json": "ce98cb377ff3699036409b5558791ef801d15baa6bd9157cb289b89879237eef",
+    "src/buffetbot/ingestion.py": "efd03116965ea4b4031f3c0e105a8798385d2f13d38be8b863f297ff6ded65a6",
+    "src/buffetbot/ingestion_models.py": "79ea103e7c99246345ff8418623761f9e3615694383e0cc982b0cb3f24dad8f8",
+    "src/buffetbot/logging.py": "cf706b1593b855707867fe8265d4018fd9ee8e5aed62bafc34bcb27a83ff5f07",
+    "src/buffetbot/market_http.py": "52845c63611c58f916f2060e2552a4b758e9cef98f6d4ee9da36372728f4456f",
+    "src/buffetbot/snapshots.py": "f151fda057c6962543921025da45cc6d2b64286aa2adc09fb37cd7eff0e62bcc",
+    "tests/conftest.py": "263c558a80adf638e34cb9b4772927df0be4a8a2b19eb28a77e006332634f13e",
+    "tests/test_cli.py": "47d798d67d1f8e1a3aa4d25cca1c7302e897d66c6171500e6b72465c84899d9b",
+    "tests/test_config.py": "825400e0a78c4bf6b8e2cb8df3776523c2992c7545a602939d52cf075e8c56fd",
+    "tests/test_contracts.py": "f871ff87391523f451b6045d1374011334dbf7679feecae5f875f8b0ae3b01a4",
+    "tests/test_engine_qualification.py": "de2c30868fb38252e95c35b25e6abb8fb33baedbffea5c80306d796c3b200903",
+    "tests/test_ingestion.py": "5926607ad4709126e3c32662fb77b6f60b05640c61f0415c66576e149ad8d5e2",
+    "tests/test_logging.py": "ca6076f2470dd5f9058a36e662b41b3b06265f0c1cea4526814b54e217db234c",
+    "tests/test_snapshots.py": "4a842a5a5fc152a2dce4e74ad57fecec698e52e44b32a607d3f26116a75e50b9",
+    "uv.lock": "bd6071ced275f50e22d0398ead15496c6fd57e46304a8c0128b40b8405b5bd03"
+  },
+  "versions": {
+    "buffetbot": "0.1.0",
+    "pydantic": "2.12.5",
+    "duckdb": "1.5.5",
+    "pyarrow": "25.0.1",
+    "pandas_market_calendars": "5.4.0",
+    "pytest": "9.1.1",
+    "ruff": "0.16.6"
+  },
+  "dependency_versions_changed": false,
+  "checks": [
+    {
+      "command": "uv run --locked --offline --group qualification pytest -q",
+      "returncode": 0,
+      "result": "257 passed in 82.82s; 58 new cases and all 199 earlier cases."
+    },
+    {
+      "command": "uv run --locked --offline --group qualification ruff check src tests qualification examples",
+      "returncode": 0,
+      "result": "All checks passed!"
+    },
+    {
+      "command": "uv run --locked --offline --group qualification ruff format --check src tests qualification examples",
+      "returncode": 0,
+      "result": "35 files already formatted"
+    },
+    {
+      "command": "uv pip check",
+      "returncode": 0,
+      "result": "All 275 installed packages are compatible"
+    },
+    {
+      "command": "git diff --check",
+      "returncode": 0,
+      "result": "Passed"
+    }
+  ],
+  "fresh_environment": {
+    "status": "passed",
+    "origin": "synthetic",
+    "temporary_environment_removed": true,
+    "checks": [
+      {
+        "command": [
+          "/home/jack/.local/bin/uv",
+          "sync",
+          "--locked",
+          "--offline",
+          "--no-editable",
+          "--reinstall-package",
+          "buffetbot"
+        ],
+        "cwd": "/home/jack/Desktop/BuffetBot",
+        "returncode": 0,
+        "stdout": "",
+        "stderr": "Using CPython 3.12.3 interpreter at: /usr/bin/python3.12\nCreating virtual environment at: /tmp/buffetbot-bb005-fresh-4___u0kt/env\nResolved 279 packages in 1ms\n   Building buffetbot @ file:///home/jack/Desktop/BuffetBot\n      Built buffetbot @ file:///home/jack/Desktop/BuffetBot\nPrepared 1 package in 424ms\nInstalled 25 packages in 21ms\n + annotated-types==0.8.0\n + buffetbot==0.1.0 (from file:///home/jack/Desktop/BuffetBot)\n + duckdb==1.5.5\n + exchange-calendars==4.13.2\n + iniconfig==2.3.0\n + korean-lunar-calendar==0.4.0\n + numpy==2.4.6\n + packaging==26.3\n + pandas==2.3.3\n + pandas-market-calendars==5.4.0\n + pluggy==1.6.0\n + pyarrow==25.0.1\n + pydantic==2.12.5\n + pydantic-core==2.41.5\n + pygments==2.21.0\n + pyluach==2.3.0\n + pytest==9.1.1\n + python-dateutil==2.9.0.post0\n + pytz==2026.3.post1\n + ruff==0.16.6\n + six==1.17.0\n + toolz==1.1.0\n + typing-extensions==4.16.0\n + typing-inspection==0.4.4\n + tzdata==2026.3\n"
+      },
+      {
+        "command": [
+          "/tmp/buffetbot-bb005-fresh-4___u0kt/env/bin/python",
+          "/home/jack/Desktop/BuffetBot/examples/ingestion/validate.py"
+        ],
+        "cwd": "/tmp/buffetbot-bb005-fresh-4___u0kt",
+        "returncode": 0,
+        "stdout": "{\n  \"origin\": \"synthetic\",\n  \"status\": \"passed\",\n  \"initial\": {\n    \"schema_version\": 1,\n    \"adapter_version\": \"alpaca_regular_minutes.v1\",\n    \"origin\": \"synthetic\",\n    \"request_id\": \"48a6d2512b10f30443f122fb56704679d69160667a6745a048b9ae4ee444eafe\",\n    \"dataset_id\": \"aa5bbb9f9bbff97e62510dde46b75cbaf0369846a0abf2655efa0c70a018e722\",\n    \"capture_id\": \"f74fcad68f9c74186a2f6470656f6fe07930dca44dddfeeaec9fb2ff6040778d\",\n    \"cache_hit\": false\n  },\n  \"refreshed\": {\n    \"schema_version\": 1,\n    \"adapter_version\": \"alpaca_regular_minutes.v1\",\n    \"origin\": \"synthetic\",\n    \"request_id\": \"48a6d2512b10f30443f122fb56704679d69160667a6745a048b9ae4ee444eafe\",\n    \"dataset_id\": \"f627d2ada5919c3819ba065fe725875ebc49a332e666fede3e891a94295b978c\",\n    \"capture_id\": \"e9e10840e87e173c52e2b6712b9496785ede4c053604772738de883f5b654de1\",\n    \"cache_hit\": false\n  },\n  \"cached_without_network\": true,\n  \"replay_matches_original\": true,\n  \"report\": {\n    \"schema_version\": 1,\n    \"dataset_id\": \"aa5bbb9f9bbff97e62510dde46b75cbaf0369846a0abf2655efa0c70a018e722\",\n    \"origin\": \"synthetic\",\n    \"status\": \"verified\",\n    \"quality\": {\n      \"schema_version\": 1,\n      \"origin\": \"synthetic\",\n      \"usable\": true,\n      \"coverage\": [\n        {\n          \"symbol\": \"BBTEST\",\n          \"expected_bars\": 2,\n          \"observed_bars\": 2,\n          \"missing_sessions\": []\n        },\n        {\n          \"symbol\": \"ZZTEST\",\n          \"expected_bars\": 2,\n          \"observed_bars\": 2,\n          \"missing_sessions\": []\n        }\n      ],\n      \"expected_closures\": [],\n      \"shortened_sessions\": [\n        \"2024-07-03\"\n      ],\n      \"findings\": [\n        {\n          \"severity\": \"warning\",\n          \"code\": \"unknown_revision_timing\",\n          \"symbol\": null,\n          \"session\": null,\n          \"detail\": \"Historical revisions cannot establish point-in-time availability.\"\n        },\n        {\n          \"severity\": \"warning\",\n          \"code\": \"synthetic_data\",\n          \"symbol\": null,\n          \"session\": null,\n          \"detail\": \"Fabricated fixture; not validated market history or trading performance.\"\n        }\n      ]\n    },\n    \"coverage\": [\n      {\n        \"symbol\": \"BBTEST\",\n        \"bars\": 2,\n        \"first_session\": \"2024-07-02\",\n        \"last_session\": \"2024-07-03\",\n        \"zero_volume_bars\": 0\n      },\n      {\n        \"symbol\": \"ZZTEST\",\n        \"bars\": 2,\n        \"first_session\": \"2024-07-02\",\n        \"last_session\": \"2024-07-03\",\n        \"zero_volume_bars\": 0\n      }\n    ],\n    \"manifest\": {\n      \"schema_version\": 1,\n      \"storage_schema\": \"daily_market_snapshot.v1\",\n      \"plan\": {\n        \"schema_version\": 1,\n        \"schema_id\": \"market_observation.v1\",\n        \"origin\": \"synthetic\",\n        \"provider\": \"alpaca\",\n        \"feed\": \"sip\",\n        \"universe\": [\n          {\n            \"symbol\": \"BBTEST\",\n            \"asset_class\": \"us_etf\",\n            \"currency\": \"USD\",\n            \"exchange\": \"ARCA\",\n            \"calendar\": \"XNYS\",\n            \"timezone\": \"America/New_York\",\n            \"listed_on\": \"2000-01-01\",\n            \"delisted_on\": null\n          },\n          {\n            \"symbol\": \"ZZTEST\",\n            \"asset_class\": \"us_etf\",\n            \"currency\": \"USD\",\n            \"exchange\": \"ARCA\",\n            \"calendar\": \"XNYS\",\n            \"timezone\": \"America/New_York\",\n            \"listed_on\": \"2000-01-01\",\n            \"delisted_on\": null\n          }\n        ],\n        \"interval\": \"1d\",\n        \"coverage_start\": \"2024-07-02\",\n        \"coverage_end\": \"2024-07-03\",\n        \"first_execution_session\": \"2024-07-03\",\n        \"warmup_sessions\": 1,\n        \"retrieved_at\": \"2026-09-08T00:00:00.000000Z\",\n        \"retrieval_convention\": \"alpaca_regular_minutes.v1; original response capture SHA-256 f74fcad68f9c74186a2f6470656f6fe07930dca44dddfeeaec9fb2ff6040778d; complete paginated read, no symbol remapping.\",\n        \"availability_convention\": \"Historical exploratory assumptions: completed regular-session bars at close + 15 minutes; actions at ex/effective open. Original publication and revision times are unknown; ingestion timestamps are actual capture times.\",\n        \"revision_policy\": \"unknown\",\n        \"limitations\": [\n          \"unknown_revision_timing\",\n          \"historical_availability_assumed\",\n          \"historical_action_timing_assumed\",\n          \"provider_action_completeness_unverified\",\n          \"fixed_declared_universe\",\n          \"regular_minutes_aggregation\",\n          \"closing_boundary_auction_excluded\",\n          \"synthetic_data\"\n        ],\n        \"executable_adjustment\": \"raw\",\n        \"research_adjustment\": \"split_as_of_cutoff\",\n        \"zero_volume_policy\": \"reject\",\n        \"corporate_actions_coverage\": \"complete\",\n        \"corporate_actions_source\": \"Alpaca v1 corporate-actions, all types and data_quality=all, process dates 1970 through capture request date; complete pagination then economic-date filtering. Completeness is relative to the provider response, not independently authenticated.\"\n      },\n      \"calendar_source\": \"pandas_market_calendars:NYSE\",\n      \"calendar_version\": \"5.4.0\",\n      \"parquet_writer\": \"pyarrow:25.0.1\",\n      \"files\": [\n        {\n          \"name\": \"bars.parquet\",\n          \"sha256\": \"5299047f8282c557e4cbd2a5d92ec91ad06a30c9b8bc7eb03557ccd241c91771\",\n          \"rows\": 4,\n          \"size_bytes\": 6609\n        },\n        {\n          \"name\": \"actions.parquet\",\n          \"sha256\": \"0e315944a0e8b2dc0d21cae80ed56c92c9da8671ae1c854de1b69ff7638c2830\",\n          \"rows\": 2,\n          \"size_bytes\": 4133\n        },\n        {\n          \"name\": \"sessions.parquet\",\n          \"sha256\": \"a5d89b48b5c74cf941976c9fe5fffc9d1b29c31214633bcac4bac095c04cadee\",\n          \"rows\": 2,\n          \"size_bytes\": 1353\n        }\n      ],\n      \"quality\": {\n        \"schema_version\": 1,\n        \"origin\": \"synthetic\",\n        \"usable\": true,\n        \"coverage\": [\n          {\n            \"symbol\": \"BBTEST\",\n            \"expected_bars\": 2,\n            \"observed_bars\": 2,\n            \"missing_sessions\": []\n          },\n          {\n            \"symbol\": \"ZZTEST\",\n            \"expected_bars\": 2,\n            \"observed_bars\": 2,\n            \"missing_sessions\": []\n          }\n        ],\n        \"expected_closures\": [],\n        \"shortened_sessions\": [\n          \"2024-07-03\"\n        ],\n        \"findings\": [\n          {\n            \"severity\": \"warning\",\n            \"code\": \"unknown_revision_timing\",\n            \"symbol\": null,\n            \"session\": null,\n            \"detail\": \"Historical revisions cannot establish point-in-time availability.\"\n          },\n          {\n            \"severity\": \"warning\",\n            \"code\": \"synthetic_data\",\n            \"symbol\": null,\n            \"session\": null,\n            \"detail\": \"Fabricated fixture; not validated market history or trading performance.\"\n          }\n        ]\n      }\n    }\n  },\n  \"captured_pages\": 6,\n  \"temporary_files_removed\": true\n}\n",
+        "stderr": ""
+      },
+      {
+        "command": [
+          "/tmp/buffetbot-bb005-fresh-4___u0kt/env/bin/python",
+          "-c",
+          "import buffetbot, importlib.util; from pathlib import Path; from buffetbot.fixtures.alpaca import SyntheticAlpaca; assert Path('/home/jack/Desktop/BuffetBot') not in Path(buffetbot.__file__).parents; assert importlib.util.find_spec(\"lumibot\") is None; assert importlib.util.find_spec(\"sklearn\") is None; assert len(SyntheticAlpaca().bars) == 2; print(\"Installed package includes ingestion fixtures; engine/model packages absent.\")"
+        ],
+        "cwd": "/tmp/buffetbot-bb005-fresh-4___u0kt",
+        "returncode": 0,
+        "stdout": "Installed package includes ingestion fixtures; engine/model packages absent.\n",
+        "stderr": ""
+      }
+    ]
+  },
+  "synthetic_demo": "BB-005-synthetic-demo.json",
+  "actual_provider_check": "BB-005-provider-check.json",
+  "remaining": [
+    "Configure local Alpaca credentials and verify both data endpoints and selected feed.",
+    "Download a small real dataset, compare source records, inspect snapshot and verify cache reuse.",
+    "Resolve actual action-data or coverage limitations before claiming BB-005 complete."
+  ]
+}

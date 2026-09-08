@@ -1,0 +1,34 @@
+{
+  "schema_version": 1,
+  "story": "BB-005",
+  "status": "blocked",
+  "checked_at": "2026-09-08T01:25:50.668472+00:00",
+  "reason": "Alpaca API key and secret are not configured locally.",
+  "requested_origin": "historical",
+  "requested_feed": "sip",
+  "actual_provider_http_requests": 0,
+  "actual_data_obtained": false,
+  "endpoint_entitlements": "unverified",
+  "command": [
+    "/home/jack/.local/bin/uv",
+    "run",
+    "--locked",
+    "--offline",
+    "--group",
+    "qualification",
+    "buffetbot",
+    "datasets",
+    "ingest",
+    "--request",
+    "config/history-spy.json"
+  ],
+  "returncode": 1,
+  "report": {
+    "status": "blocked",
+    "origin": "historical",
+    "code": "credentials_missing",
+    "error": "Configure Alpaca API key/secret in the documented environment variables or an explicit --secrets file. Real market-data verification is blocked.",
+    "capture_id": null
+  },
+  "stderr": "2026-09-08T01:25:50Z INFO buffetbot.datasets run=32410fde126d4548927801e059fd1d3b job=- Dataset operation completed: blocked\n"
+}

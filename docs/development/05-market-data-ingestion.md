@@ -1,6 +1,7 @@
 # BB-005 — Historical market data ingestion
 
-**Status:** Not started  
+**Status:** In progress — offline implementation verified; real-provider check blocked by missing credentials. [Evidence](evidence/BB-005.md)
+
 **Depends on:** [BB-004](04-dataset-snapshots.md)  
 **North Star:** Historical data; feed consistency; reproducible research
 

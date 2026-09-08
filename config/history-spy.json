@@ -1,0 +1,13 @@
+{
+  "schema_version": 1,
+  "universe": [{"symbol": "SPY", "exchange": "ARCA", "listed_on": "1993-01-29"}],
+  "start_session": "2024-07-01",
+  "end_session": "2024-07-09",
+  "first_execution_session": "2024-07-02",
+  "warmup_sessions": 1,
+  "interval": "1d",
+  "feed": "sip",
+  "adjustment": "raw",
+  "aggregation": "regular_session_from_1min",
+  "zero_volume_policy": "reject"
+}
