@@ -4,6 +4,8 @@ This checklist verifies the end state described by the [North Star](../../NORTHS
 
 **Current state:** Full release checks not run. [BB-001 evidence](evidence/BB-001.md) verifies the local package/configuration foundation, but the complete setup check also requires BB-022's container deployment. [BB-002 evidence](evidence/BB-002.md) passes synthetic engine qualification; application accounting integration in BB-009 and actual broker checks remain unverified.
 
+[BB-003 evidence](evidence/BB-003.md) verifies contracts and experiment identity. Policy/risk integration in BB-007/008 is still required before the full contract acceptance row can pass.
+
 For each row, record **Passed**, **Failed**, **Not run**, or **Blocked**, the code/configuration identity, command or walkthrough, date, artifact path, and whether it used synthetic fixtures, recorded responses, actual external data, or the broker paper environment. No full release row is complete yet; foundation evidence must not imply broader acceptance.
 
 ## Mandatory checks
@@ -12,7 +14,7 @@ For each row, record **Passed**, **Failed**, **Not run**, or **Blocked**, the co
 | --- | --- | --- | --- |
 | Clean setup | A fresh isolated environment and documented Compose setup start the application; live configuration is rejected | BB-001, BB-022 | Not run |
 | Engine qualification | Supplied-data timing, costs, split/dividend accounting, saved-model loading, and required adapter paths are demonstrated | BB-002, BB-009 | Not run for full integration; BB-002 passed |
-| Contract validation | Invalid units/weights/times and incompatible schemas fail explicitly; targets are isolated from broker authority | BB-003, BB-007, BB-008 | Not run |
+| Contract validation | Invalid units/weights/times and incompatible schemas fail explicitly; targets are isolated from broker authority | BB-003, BB-007, BB-008 | Not run for full integration; BB-003 passed |
 | Immutable data | Snapshots survive refreshes unchanged; corrupt/incomplete snapshots are rejected; fixture origin stays visible | BB-004 | Not run |
 | Actual market ingestion | A real provider download has verified coverage, feed, action treatment, and cached provenance | BB-005 | Not run |
 | Durable jobs | Browser retries, child failures, and worker restarts preserve honest job states and artifacts | BB-006, BB-011 | Not run |

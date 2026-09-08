@@ -4,11 +4,13 @@ BuffetBot is a local application being built for trading research, numerical mac
 
 **Start with the [North Star](NORTHSTAR.md).** It defines the reviewed product direction, technical stack, architecture, MVP scope, operating boundaries, and completion criteria.
 
-The [development backlog](docs/development/README.md) contains 24 MVP stories. BB-001 implements the initial Python package, typed configuration, local doctor command, redacted logging, and configuration tests. BB-002 qualifies Lumibot using synthetic offline backtests and local broker transport tests. Production strategies, data ingestion, model workflows, the broker connection, and browser dashboard remain later work.
+The [development backlog](docs/development/README.md) contains 24 MVP stories. BB-001 implements the initial Python package, typed configuration, local doctor command, redacted logging, and configuration tests. BB-002 qualifies Lumibot using synthetic offline backtests and local broker transport tests. BB-003 implements shared data/strategy contracts and reproducible experiment specifications. Production strategies, data ingestion, model workflows, the broker connection, and browser dashboard remain later work.
 
 [BB-001 verification evidence](docs/development/evidence/BB-001.md) records the clean-environment installation and passing checks.
 
 [BB-002 engine decision](docs/development/evidence/BB-002-engine-decision.md) adopts Lumibot 4.5.91 with demonstrated corrections for feature timing, dividend payments and partial-order restart import. It records the dependency/license findings and unrun actual paper checks.
+
+[BB-003 evidence](docs/development/evidence/BB-003.md) records validated units, data availability, source evidence, pending exposure, immutable specifications and separate run identities. The [contract guide](docs/contracts.md) documents the v1 interfaces and limits.
 
 ## Setup
 
@@ -70,12 +72,20 @@ Private `*.local.toml` files, `.env` files, virtual environments, runtime direct
 ## Development checks
 
 ```bash
-uv run --locked ruff check src tests qualification
-uv run --locked ruff format --check src tests qualification
+uv run --locked ruff check src tests qualification examples/contracts/validate.py
+uv run --locked ruff format --check src tests qualification examples/contracts/validate.py
 uv run --locked pytest -q
 ```
 
 The foundation tests exercise offline/paper credential boundaries, rejected live configuration, invalid and overlapping paths, symlink protection, secret-safe errors/logging, and the doctor's lack of network access. They use temporary files and dummy secrets; no broker account or model is required. The engine regression is skipped unless its optional dependencies are installed.
+
+The contract tests check temporal eligibility, exact money/share units, model/source references, target/exposure consistency, version rejection and stable experiment hashes. Run the standalone synthetic example with the foundation dependencies:
+
+```bash
+uv run --locked --offline python examples/contracts/validate.py
+```
+
+The example validates an observation/context/target/audit flow and prints two different run IDs for the same specification. It contacts no services and submits no orders; example model/dataset references are illustrative rather than published artifacts.
 
 ## Engine qualification
 

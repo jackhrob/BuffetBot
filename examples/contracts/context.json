@@ -1,0 +1,195 @@
+{
+  "schema_version": 1,
+  "run_id": "8234f380-bf03-4054-989c-7c91562e3171",
+  "experiment_id": "a84051664b93b6bec2e4ef553c967dacc25ffc4af0cc4b63cadf658b48c66697",
+  "mode": "backtest",
+  "decision_at": "2024-07-01T20:15:00.000000Z",
+  "execution_at": "2024-07-02T13:30:00.000000Z",
+  "execution_session": "2024-07-02",
+  "target_expires_at": "2024-07-02T14:00:00.000000Z",
+  "universe": [
+    {
+      "symbol": "SPY",
+      "asset_class": "us_etf",
+      "currency": "USD",
+      "exchange": "ARCX",
+      "calendar": "XNYS",
+      "timezone": "America/New_York",
+      "listed_on": "1993-01-22",
+      "delisted_on": null
+    }
+  ],
+  "dataset_ids": [
+    "5142003fa310dad71e1479ec0c0c6aeefe02700df222db28457ab3f5bf189c1f",
+    "b46cebf012a2a3723e2673b45dc8f873c967beb172a036ec818a766ef564ba8c",
+    "501d9d782da04f70dcab37a42dd84b34d8a226a263afd6c3e3a958e3073057e5"
+  ],
+  "strategy": {
+    "name": "contract_demo",
+    "version": "1",
+    "feature_schema_id": "close.v1",
+    "parameters": [
+      {
+        "name": "window",
+        "value": 1
+      }
+    ],
+    "numerical_model": {
+      "artifact_sha256": "d93115f5a24ec68cf067bf3a240ac998973518edfe7be86667b81aaa0a216f8e",
+      "preprocessing_sha256": "ffeed92a6253845e8697770bfb3641bddc6b5ec9bc457a02bc4c3c93590a3328",
+      "training_dataset_id": "a7843dd0ce81a03924dcd358226c3fd2771430f9868c8738255d41982b027848",
+      "feature_schema_id": "close.v1",
+      "trained_through": "2024-06-01T00:00:00.000000Z",
+      "created_at": "2024-06-02T00:00:00.000000Z",
+      "feature_names": [
+        "close"
+      ]
+    },
+    "feature_names": [
+      "close"
+    ]
+  },
+  "portfolio": {
+    "as_of": "2024-07-01T20:15:00.000000Z",
+    "currency": "USD",
+    "cash_usd": "1000",
+    "dividend_receivable_usd": "20",
+    "holdings": [
+      {
+        "symbol": "SPY",
+        "quantity": 10,
+        "raw_mark_usd": "105",
+        "marked_at": "2024-07-01T20:15:00.000000Z"
+      }
+    ],
+    "pending_orders": [
+      {
+        "intention_id": "pending-buy",
+        "symbol": "SPY",
+        "side": "buy",
+        "remaining_quantity": 2,
+        "reserved_cash_usd": "220"
+      },
+      {
+        "intention_id": "pending-sell",
+        "symbol": "SPY",
+        "side": "sell",
+        "remaining_quantity": 3,
+        "reserved_cash_usd": "0"
+      }
+    ]
+  },
+  "observations": [
+    {
+      "schema_version": 1,
+      "symbol": "SPY",
+      "session": "2024-07-01",
+      "interval": "1d",
+      "interval_start": "2024-07-01T13:30:00.000000Z",
+      "interval_end": "2024-07-01T20:00:00.000000Z",
+      "available_at": "2024-07-01T20:15:00.000000Z",
+      "first_ingested_at": "2026-09-07T00:00:00.000000Z",
+      "dataset_id": "5142003fa310dad71e1479ec0c0c6aeefe02700df222db28457ab3f5bf189c1f",
+      "provider": "fixture",
+      "feed": "synthetic",
+      "revision_id": "1",
+      "origin": "synthetic",
+      "adjustment": "raw",
+      "currency": "USD",
+      "open": "100",
+      "high": "106",
+      "low": "99",
+      "close": "105",
+      "volume": 1000000
+    }
+  ],
+  "features": [
+    {
+      "schema_version": 1,
+      "symbol": "SPY",
+      "session": "2024-07-01",
+      "dataset_id": "5142003fa310dad71e1479ec0c0c6aeefe02700df222db28457ab3f5bf189c1f",
+      "feature_schema_id": "close.v1",
+      "available_at": "2024-07-01T20:15:00.000000Z",
+      "computed_at": "2026-09-07T00:00:00.000000Z",
+      "adjusted_as_of": "2024-07-01T20:15:00.000000Z",
+      "adjustment": "split_as_of_cutoff",
+      "values": [
+        {
+          "name": "close",
+          "value": "105"
+        }
+      ]
+    }
+  ],
+  "documents": [
+    {
+      "schema_version": 1,
+      "document_id": "prior",
+      "dataset_id": "b46cebf012a2a3723e2673b45dc8f873c967beb172a036ec818a766ef564ba8c",
+      "source_url": "https://example.invalid/prior",
+      "published_at": "2024-06-01T18:00:00.000000Z",
+      "available_at": "2024-06-01T18:00:00.000000Z",
+      "first_ingested_at": "2026-09-07T00:00:00.000000Z",
+      "revision_id": "1",
+      "revision_policy": "point_in_time",
+      "content_sha256": "49631a8b378f06c2fa05cb8087f04b9b6a9b08c05db8290b0d8d73c1c5d406d4",
+      "original_text": "Policy is unchanged."
+    },
+    {
+      "schema_version": 1,
+      "document_id": "current",
+      "dataset_id": "b46cebf012a2a3723e2673b45dc8f873c967beb172a036ec818a766ef564ba8c",
+      "source_url": "https://example.invalid/current",
+      "published_at": "2024-07-01T18:00:00.000000Z",
+      "available_at": "2024-07-01T18:00:00.000000Z",
+      "first_ingested_at": "2026-09-07T00:00:00.000000Z",
+      "revision_id": "1",
+      "revision_policy": "point_in_time",
+      "content_sha256": "e340b31b5b48aad3f59570f7f4ac75e8be4b4a53f0ae8acc8ffa1c4c48cc95fb",
+      "original_text": "Policy is tighter."
+    }
+  ],
+  "macro": {
+    "schema_version": 1,
+    "assessment_id": "synthetic-comparison",
+    "dataset_id": "501d9d782da04f70dcab37a42dd84b34d8a226a263afd6c3e3a958e3073057e5",
+    "source_document_ids": [
+      "current"
+    ],
+    "comparison_document_ids": [
+      "prior"
+    ],
+    "policy_direction": "tighter",
+    "concern_change": "unknown",
+    "evidence": [
+      {
+        "document_id": "prior",
+        "content_sha256": "49631a8b378f06c2fa05cb8087f04b9b6a9b08c05db8290b0d8d73c1c5d406d4",
+        "start": 0,
+        "end": 20,
+        "text": "Policy is unchanged."
+      },
+      {
+        "document_id": "current",
+        "content_sha256": "e340b31b5b48aad3f59570f7f4ac75e8be4b4a53f0ae8acc8ffa1c4c48cc95fb",
+        "start": 0,
+        "end": 18,
+        "text": "Policy is tighter."
+      }
+    ],
+    "source_cutoff": "2024-07-01T20:15:00.000000Z",
+    "generated_at": "2026-09-07T00:00:00.000000Z",
+    "expires_at": "2024-07-02T14:00:00.000000Z",
+    "use": "historical_exploratory",
+    "model": {
+      "artifact_sha256": "58899ff580de1131938d241fe2e78f5b95a05ca6c6e65770c833026cf5b92479",
+      "prompt_sha256": "c376e040a4168cbacb6558dd03a9791be4ef41e2501b232a302ff0a037cd1554",
+      "output_schema_id": "macro_assessment.v1",
+      "training_cutoff": null
+    },
+    "generation_parameters": [],
+    "response_sha256": "7da0e24d8ce073c47bf7d6cbac5a23711b0fed4f1284085a37a47b8faa08100d",
+    "latency_ms": 0
+  }
+}

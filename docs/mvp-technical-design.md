@@ -2,7 +2,7 @@
 
 The [North Star](../NORTHSTAR.md) is the reviewed primary product and architecture reference. The [development backlog](development/README.md) defines the implementation stories and release evidence. This document supplies supporting implementation detail; align it with the North Star if a conflict arises.
 
-Proposed September 7, 2026. This document describes the target architecture. [BB-001](development/01-project-foundation.md) provides the verified local Python/configuration foundation, and [BB-002](development/02-engine-qualification.md) qualifies the engine with synthetic experiments. Production trading, model, and broker integration work remains planned. It refines the earlier [build proposal](build-proposal.md), particularly the engine choice and local model deployment.
+Proposed September 7, 2026. This document describes the target architecture. [BB-001](development/01-project-foundation.md) provides the verified local Python/configuration foundation, [BB-002](development/02-engine-qualification.md) qualifies the engine with synthetic experiments, and [BB-003](development/03-contracts-and-experiments.md) implements the shared contracts. Production trading, model, and broker integration work remains planned. It refines the earlier [build proposal](build-proposal.md), particularly the engine choice and local model deployment.
 
 ## Product boundary
 
@@ -66,6 +66,8 @@ The engine owns its order lifecycle; our adapter records events and exposes reco
 Persist datasets, artifacts, and operational state on mounted local volumes. Bind interfaces locally by default. Broker credentials belong in local environment configuration and are excluded from Git, research processes, model prompts, and logs. The MVP execution adapter accepts paper configuration only.
 
 ## Contracts that make strategies replaceable
+
+The implemented v1 records, binding checks, canonical experiment identity and examples are documented in the [contract guide](contracts.md). Storage, policy formulas and provider/engine adapters remain later integrations against that boundary.
 
 | Record | Required meaning |
 | --- | --- |

@@ -1,0 +1,20 @@
+{
+  "schema_version": 1,
+  "run_id": "8234f380-bf03-4054-989c-7c91562e3171",
+  "experiment_id": "a84051664b93b6bec2e4ef553c967dacc25ffc4af0cc4b63cadf658b48c66697",
+  "strategy_name": "contract_demo",
+  "strategy_version": "1",
+  "decision_at": "2024-07-01T20:15:00.000000Z",
+  "feature_cutoff": "2024-07-01T20:15:00.000000Z",
+  "execution_at": "2024-07-02T13:30:00.000000Z",
+  "expires_at": "2024-07-02T14:00:00.000000Z",
+  "weights": [
+    {
+      "symbol": "SPY",
+      "weight": "0.5"
+    }
+  ],
+  "reason_codes": [
+    "synthetic_target_example"
+  ]
+}

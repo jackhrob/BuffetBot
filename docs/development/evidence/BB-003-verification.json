@@ -1,0 +1,107 @@
+{
+  "story": "BB-003",
+  "result": "Passed",
+  "verified_at": "2026-09-08T00:02:21.896810+00:00",
+  "evidence_type": "synthetic contract inputs and local validation; no external integrations",
+  "base_revision": "c540b6386091545aa85ccfb47248dd2a2fa26a76",
+  "python": "3.12.3",
+  "pydantic": "2.12.5",
+  "uv": "0.12.10",
+  "source_hashes": {
+    "pyproject.toml": "7c727e8f39c6e0e6de740680220855a7e75b5ac81a3cd4daadbf39c5e42d285b",
+    "uv.lock": "083ac37d2267bda37110246f031d5380689061a570f28a47f5633758dcb93732",
+    ".python-version": "7b55f8e67b5623c4bef3fa691288da9437d79d3aba156de48d481db32ac7d16d",
+    "src/buffetbot/__init__.py": "bb84c71a3550b99a819610278908c65fba0c524503b6b0d0055c0f53d061c34f",
+    "src/buffetbot/__main__.py": "b24f11b2aff855097208b95dc4a183ef0d48a0bf3b5b91c32295cf3c174b353b",
+    "src/buffetbot/cli.py": "92d9a867d51f289bbf92e3996693c1b35cd4e812f6d7c8eb46ca8e00f2d121e4",
+    "src/buffetbot/config.py": "406561b34116288822632a32e269f688480864b83da2d943b79a3b78e65abdfc",
+    "src/buffetbot/contracts.py": "b08b9c6baa229e75661ec3c60412b00722b8bbe2ac67361425926ed881478fa8",
+    "src/buffetbot/experiments.py": "2bf5a79c406dbf8683ed8bc93ad7e1968433fcefdeff4e8a664bdbe4084dba8b",
+    "src/buffetbot/logging.py": "cf706b1593b855707867fe8265d4018fd9ee8e5aed62bafc34bcb27a83ff5f07",
+    "tests/conftest.py": "263c558a80adf638e34cb9b4772927df0be4a8a2b19eb28a77e006332634f13e",
+    "tests/test_cli.py": "47d798d67d1f8e1a3aa4d25cca1c7302e897d66c6171500e6b72465c84899d9b",
+    "tests/test_config.py": "825400e0a78c4bf6b8e2cb8df3776523c2992c7545a602939d52cf075e8c56fd",
+    "tests/test_contracts.py": "f871ff87391523f451b6045d1374011334dbf7679feecae5f875f8b0ae3b01a4",
+    "tests/test_engine_qualification.py": "de2c30868fb38252e95c35b25e6abb8fb33baedbffea5c80306d796c3b200903",
+    "tests/test_logging.py": "ca6076f2470dd5f9058a36e662b41b3b06265f0c1cea4526814b54e217db234c",
+    "qualification/__init__.py": "1ee27a890a15b270df95455a5afd5d81d9714fa1a82e3ae71c8c333776f43fd7",
+    "qualification/__main__.py": "21abee43d948cbeacc66ef75ba43ed4f44b502e62ffa966b6784ccda1c7732e0",
+    "qualification/adapters.py": "1a4290ccbbfdb5694164b9bdabc6be0bce75ab69889962c2d33175d3ff5360d0",
+    "qualification/backtest.py": "b9a2bf7751f226346bf67e27e4b402300b8d98e3a292d5d78c89b981c4ad4e14",
+    "qualification/paper.py": "5a70ca70f1cd28154b22daeafe0d1f66e325aa6f60cee566e3ffd72bf6f976df",
+    "qualification/run.py": "f9e7ffd737cc90603f88b2fe26aed5889c6a97f3a906fbddce648817640b016d",
+    "examples/contracts/validate.py": "cdaa42acf6d4dcd166c1966ac8cee82f85696a6c6d7cec3af462088a8be25199",
+    "examples/contracts/context.json": "428c0d3bcfa689b50f77d8c8940e98642bb98372cbf4bb41d2b3bfc23c16425c",
+    "examples/contracts/execution-event.json": "749b582913ae06a445cbbad44b11ada23459b157a18cdca11f271906ca0c64a0",
+    "examples/contracts/experiment.json": "9ef50bd53e39c06ba6b7fbc9ef639dc46892e0a253998c4cb1d4afd0db9f2e17",
+    "examples/contracts/targets.json": "2167df40d9f57eb4161c7deee1b4462e6b992578e06a2cc59a6072163198a917"
+  },
+  "full_suite": {
+    "command": "uv run --locked --offline --group qualification pytest -q",
+    "exit_code": 0,
+    "result": "150 passed in 10.54s"
+  },
+  "contract_suite": {
+    "command": ".venv/bin/pytest -q tests/test_contracts.py",
+    "exit_code": 0,
+    "result": "110 passed in 0.66s"
+  },
+  "lint": {
+    "command": "uv run --locked --offline --group qualification ruff check src tests qualification examples/contracts/validate.py",
+    "exit_code": 0,
+    "result": "All checks passed!"
+  },
+  "format": {
+    "command": "uv run --locked --offline --group qualification ruff format --check src tests qualification examples/contracts/validate.py",
+    "exit_code": 0,
+    "result": "20 files already formatted"
+  },
+  "minimal_environment": {
+    "removed_after_checks": true,
+    "commands": [
+      {
+        "command": [
+          "/home/jack/.local/bin/uv",
+          "sync",
+          "--locked",
+          "--offline"
+        ],
+        "exit_code": 0,
+        "stdout": "",
+        "stderr": "Using CPython 3.12.3 interpreter at: /usr/bin/python3.12\nCreating virtual environment at: <temporary-env>/.venv\nResolved 279 packages in 1ms\nInstalled 12 packages in 7ms\n + annotated-types==0.8.0\n + buffetbot==0.1.0 (from file:///home/jack/Desktop/BuffetBot)\n + iniconfig==2.3.0\n + packaging==26.3\n + pluggy==1.6.0\n + pydantic==2.12.5\n + pydantic-core==2.41.5\n + pygments==2.21.0\n + pytest==9.1.1\n + ruff==0.16.6\n + typing-extensions==4.16.0\n + typing-inspection==0.4.4\n"
+      },
+      {
+        "command": [
+          "<temporary-env>/.venv/bin/python",
+          "examples/contracts/validate.py"
+        ],
+        "exit_code": 0,
+        "stdout": "{\n  \"status\": \"passed\",\n  \"schema_version\": 1,\n  \"origin\": \"synthetic\",\n  \"experiment_id\": \"a84051664b93b6bec2e4ef553c967dacc25ffc4af0cc4b63cadf658b48c66697\",\n  \"run_ids\": [\n    \"2366453d-b321-4f0c-9030-08a4c25be095\",\n    \"9fa79d2e-905a-4bc3-8cec-60855f76653d\"\n  ],\n  \"demo_cash_weight\": \"1\",\n  \"portfolio_equity_usd\": \"2070\",\n  \"spendable_cash_usd\": \"780\"\n}\n",
+        "stderr": ""
+      },
+      {
+        "command": [
+          "<temporary-env>/.venv/bin/python",
+          "-m",
+          "buffetbot",
+          "doctor",
+          "--json"
+        ],
+        "exit_code": 0,
+        "stdout": "{\n  \"status\": \"ready\",\n  \"scope\": \"local_configuration_only\",\n  \"run_id\": \"649bde4356f343b6a494d1d11d44681b\",\n  \"mode\": \"offline\",\n  \"config_file\": \"/home/jack/Desktop/BuffetBot/config/offline.toml\",\n  \"python\": \"3.12.3\",\n  \"paths\": {\n    \"state\": {\n      \"path\": \"/home/jack/Desktop/BuffetBot/var/state\",\n      \"exists\": true,\n      \"ready\": true,\n      \"detail\": \"Directory is accessible.\"\n    },\n    \"data\": {\n      \"path\": \"/home/jack/Desktop/BuffetBot/var/data\",\n      \"exists\": true,\n      \"ready\": true,\n      \"detail\": \"Directory is accessible.\"\n    },\n    \"artifacts\": {\n      \"path\": \"/home/jack/Desktop/BuffetBot/var/artifacts\",\n      \"exists\": true,\n      \"ready\": true,\n      \"detail\": \"Directory is accessible.\"\n    }\n  },\n  \"required_integrations\": [],\n  \"broker\": {\n    \"endpoint\": \"https://paper-api.alpaca.markets\",\n    \"credentials\": \"missing\",\n    \"missing_fields\": [\n      \"api_key\",\n      \"api_secret\"\n    ],\n    \"connectivity\": \"not_checked\"\n  }\n}\n",
+        "stderr": "2026-09-08T00:02:21Z INFO buffetbot.doctor run=649bde4356f343b6a494d1d11d44681b job=- Local configuration inspection completed: ready\n"
+      },
+      {
+        "command": [
+          "<temporary-env>/.venv/bin/python",
+          "-c",
+          "import importlib.util, importlib.metadata; assert importlib.util.find_spec('lumibot') is None; assert importlib.util.find_spec('sklearn') is None; from buffetbot.experiments import ExperimentSpecification; print('Contracts import with no engine/model packages; Pydantic', importlib.metadata.version('pydantic'))"
+        ],
+        "exit_code": 0,
+        "stdout": "Contracts import with no engine/model packages; Pydantic 2.12.5\n",
+        "stderr": ""
+      }
+    ]
+  },
+  "actual_market_model_or_broker_checks": "Not run in this story"
+}

@@ -2,11 +2,11 @@
 
 **Status:** Product direction reviewed by the owner.  
 **Created:** September 7, 2026.  
-**Current phase:** Initial implementation. [BB-001](docs/development/01-project-foundation.md) and [BB-002](docs/development/02-engine-qualification.md) are complete; the [MVP backlog](docs/development/README.md) tracks remaining implementation.
+**Current phase:** Initial implementation. BB-001 through [BB-003](docs/development/03-contracts-and-experiments.md) are complete; the [MVP backlog](docs/development/README.md) tracks remaining implementation.
 
 This is BuffetBot's guiding product and architecture document. It governs implementation scope and design decisions. The [development backlog](docs/development/README.md) turns the direction into executable stories and release criteria. The [MVP technical design](docs/mvp-technical-design.md) provides supporting detail; the [build proposal and wargame](docs/build-proposal.md) preserves research and earlier alternatives. If those documents conflict with this one, update them to reflect this direction. Subsequent owner decisions take precedence and should be recorded here.
 
-Everything described below is planned unless explicitly marked as verified. The local Python foundation, configuration/doctor command, redacted logging, and initial tests are implemented with [BB-001 evidence](docs/development/evidence/BB-001.md). [BB-002 evidence](docs/development/evidence/BB-002.md) qualifies Lumibot with synthetic backtests, a saved numerical-model probe and local broker transport tests. Production strategies/model workflows, actual broker connections and the dashboard remain unimplemented.
+Everything described below is planned unless explicitly marked as verified. The local Python foundation, configuration/doctor command, redacted logging, and initial tests are implemented with [BB-001 evidence](docs/development/evidence/BB-001.md). [BB-002 evidence](docs/development/evidence/BB-002.md) qualifies Lumibot with synthetic backtests, a saved numerical-model probe and local broker transport tests. [BB-003 evidence](docs/development/evidence/BB-003.md) verifies the shared contracts and experiment identity layer. Production strategies/model workflows, actual broker connections and the dashboard remain unimplemented.
 
 ## 1. What we are building
 

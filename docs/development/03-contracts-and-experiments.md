@@ -1,6 +1,7 @@
 # BB-003 — Shared contracts and experiment specification
 
-**Status:** Not started  
+**Status:** Done
+
 **Depends on:** [BB-001](01-project-foundation.md), [BB-002](02-engine-qualification.md)  
 **North Star:** Architecture and ownership; research integrity
 
@@ -32,6 +33,8 @@ Define a small collection of Pydantic models or equivalent typed domain records 
 ## Completion evidence
 
 Provide the contract definitions, example specifications, documented time/unit conventions, and meaningful validation results.
+
+**Delivered:** [Contract guide](../contracts.md), [synthetic examples](../../examples/contracts/README.md), [completion evidence](evidence/BB-003.md), and [machine-readable verification](evidence/BB-003-verification.json). The data-only contracts, canonical specification identity, separate run manifests and binding checks pass 110 new contract cases; the full suite passes 150 tests. No dependency was added.
 
 ## Handoff and limits
 

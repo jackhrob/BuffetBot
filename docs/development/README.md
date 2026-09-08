@@ -1,6 +1,6 @@
 # BuffetBot MVP development backlog
 
-This backlog turns the reviewed [North Star](../../NORTHSTAR.md) into 24 implementation stories. **BB-001 and BB-002 are complete** with [foundation evidence](evidence/BB-001.md) and [engine qualification evidence](evidence/BB-002.md). BB-003 through BB-024 are **not started**. The local foundation and synthetic engine experiments are verified; production trading/model integration and actual paper operation remain future work.
+This backlog turns the reviewed [North Star](../../NORTHSTAR.md) into 24 implementation stories. **BB-001 through BB-003 are complete** with [foundation evidence](evidence/BB-001.md), [engine qualification evidence](evidence/BB-002.md), and [contract evidence](evidence/BB-003.md). BB-004 through BB-024 are **not started**. The local foundation, synthetic engine experiments and shared contracts are verified; production trading/model integration and actual paper operation remain future work.
 
 The objective is a solid, stable MVP with the least technical complexity needed to meet its requirements. Development speed, story points, and estimates do not determine scope. Correctness, understandability, and a demonstrably working product do.
 
@@ -32,7 +32,7 @@ All 24 stories are required for the MVP. The first usable research workflow is B
 | --- | --- | --- | --- |
 | BB-001 | [Project foundation and configuration](01-project-foundation.md) — Done | None | Foundation |
 | BB-002 | [Trading engine qualification](02-engine-qualification.md) — Done | BB-001 | Foundation |
-| BB-003 | [Shared contracts and experiment specification](03-contracts-and-experiments.md) | BB-001, BB-002 | Foundation |
+| BB-003 | [Shared contracts and experiment specification](03-contracts-and-experiments.md) — Done | BB-001, BB-002 | Foundation |
 | BB-004 | [Dataset snapshots, quality checks, and fixtures](04-dataset-snapshots.md) | BB-003 | Research |
 | BB-005 | [Historical market data ingestion](05-market-data-ingestion.md) | BB-004 | Research |
 | BB-006 | [Durable jobs and worker lifecycle](06-jobs-and-worker.md) | BB-001, BB-003, BB-004 | Foundation |
